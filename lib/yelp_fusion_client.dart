@@ -12,5 +12,7 @@ class YelpFusion {
   /* Your Yelp Fusion API Key */
   String apiKey;
 
+  YelpFusion({@required this.apiKey}) : assert(apiKey != null);
 
+  
 }
