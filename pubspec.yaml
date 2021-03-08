@@ -1,5 +1,5 @@
 name: yelp_fusion_client
-description: A new Flutter package project.
+description: A Dart Client to access the endpoints of Yelp Fusion API.
 version: 0.0.1
 author: HelloFro (Fro Warner)
 homepage: https://github.com/HelloFro/yelp_fusion_client
