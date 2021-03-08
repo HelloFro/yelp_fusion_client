@@ -13,7 +13,7 @@ class Open {
   /// End of the opening hours in a day, in 24-hour clock notation ie. 2130 == 9:30 PM.
   final String end;
 
-  /// Whether the business opens overnight or not. When this is true, the end time will be lower than the start time.
+  /// Whether the business opens overnight or not. Note: When this is true, the end time will be lower than the start time.
   final bool isOvernight;
 
   Open({
@@ -94,5 +94,62 @@ class Hours {
       o.isOpenNow == isOpenNow &&
       o.hoursType == hoursType &&
       listEquals(o.open, open);
+  }
+}
+
+/// Out of the ordinary hours for a business that apply on certain dates.
+class SpecialHours {
+  /// An ISO8601 date string representing the date for which these special hours apply.
+  final String date;
+
+  /// Whether this particular special hour represents a date where a business is closed.
+  final bool isClosed;
+
+  /// Start of the opening hours in a day, in 24-hour clock notation ie. 1000 == 10:00 AM.
+  final String start;
+
+  /// End of the opening hours in a day, in 24-hour clock notation ie. 2130 == 9:30 PM.
+  final String end;
+
+  /// Whether the special hours time range spans past midnight or not. Note: When this is true, the end time will be lower than the start time.
+  final bool isOvernight;
+
+  SpecialHours({
+    this.date,
+    this.isClosed,
+    this.start,
+    this.end,
+    this.isOvernight,
+  });
+
+  factory SpecialHours.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+  
+    return SpecialHours(
+      date: map['date'],
+      isClosed: map['is_closed'],
+      start: map['start'],
+      end: map['end'],
+      isOvernight: map['is_overnight'],
+    );
+  }
+
+  factory SpecialHours.fromJson(String source) => SpecialHours.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return 'SpecialHours(date: $date, isClosed: $isClosed, start: $start, end: $end, isOvernight: $isOvernight)';
+  }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+  
+    return o is SpecialHours &&
+      o.date == date &&
+      o.isClosed == isClosed &&
+      o.start == start &&
+      o.end == end &&
+      o.isOvernight == isOvernight;
   }
 }
