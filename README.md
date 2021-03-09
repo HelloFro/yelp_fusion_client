@@ -2,7 +2,7 @@
 
 A Dart Client for Yelp Fusion API.
 
-![](Yelp-Fusion-Dart-Banner.png)
+![](https://github.com/HelloFro/yelp_fusion_client/blob/main/Yelp-Fusion-Dart-Banner.png)
 
 This Dart package reduces the work to write Future methods and https requests to fetch the API and parse the json data for developers looking to use the Yelp Fusion API in an app. Developers can retrieve API data formatted as json or package defined Dart Objects.
 
