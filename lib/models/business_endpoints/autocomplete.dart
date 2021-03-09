@@ -6,7 +6,7 @@ import 'package:yelp_fusion_client/models/category.dart';
 
 class Autocomplete {
 
-  final Businesses businesses;
+  final BusinessesAutocompleted businesses;
   final Categories categories;
   final Terms terms;
 
@@ -20,7 +20,7 @@ class Autocomplete {
     if (map == null) return null;
   
     return Autocomplete(
-      businesses: Businesses.fromList(map['businesses']),
+      businesses: BusinessesAutocompleted.fromList(map['businesses']),
       categories: Categories.fromList(map['categories']),
       terms: Terms.fromList(map['terms']),
     );
@@ -42,27 +42,27 @@ class Autocomplete {
   }
 }
 
-class Business {
+class BusinessAutocompleted {
 
   final String name;
 
   final String id;
 
-  Business({
+  BusinessAutocompleted({
     this.name,
     this.id,
   });
 
-  factory Business.fromMap(Map<String, dynamic> map) {
+  factory BusinessAutocompleted.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
   
-    return Business(
+    return BusinessAutocompleted(
       name: map['name'],
       id: map['id'],
     );
   }
 
-  factory Business.fromJson(String source) => Business.fromMap(json.decode(source));
+  factory BusinessAutocompleted.fromJson(String source) => BusinessAutocompleted.fromMap(json.decode(source));
 
   @override
   String toString() => 'Business(name: $name, id: $id)';
@@ -71,29 +71,29 @@ class Business {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
   
-    return o is Business &&
+    return o is BusinessAutocompleted &&
       o.name == name &&
       o.id == id;
   }
 }
 
-class Businesses {
+class BusinessesAutocompleted {
 
-  final List<Business> businesses;
+  final List<BusinessAutocompleted> businesses;
 
-  Businesses({
+  BusinessesAutocompleted({
     this.businesses,
   });
 
-  factory Businesses.fromList(List<dynamic> list) {
+  factory BusinessesAutocompleted.fromList(List<dynamic> list) {
     if (list == null) return null;
   
-    return Businesses(
-      businesses: list.map((x) => Business.fromMap(x)).toList(),
+    return BusinessesAutocompleted(
+      businesses: list.map((x) => BusinessAutocompleted.fromMap(x)).toList(),
     );
   }
 
-  factory Businesses.fromJson(String source) => Businesses.fromList(json.decode(source));
+  factory BusinessesAutocompleted.fromJson(String source) => BusinessesAutocompleted.fromList(json.decode(source));
 
   @override
   String toString() => 'Businesses(businesses: $businesses)';
@@ -103,7 +103,7 @@ class Businesses {
     if (identical(this, o)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is Businesses &&
+    return o is BusinessesAutocompleted &&
       listEquals(o.businesses, businesses);
   }
 }
