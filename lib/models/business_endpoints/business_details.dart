@@ -8,8 +8,9 @@ import 'package:yelp_fusion_client/models/hours.dart';
 import 'package:yelp_fusion_client/models/location.dart';
 import 'package:yelp_fusion_client/models/messaging.dart';
 
-/** This endpoint returns detailed business content.
-  * Note: at this time, the API does not return businesses without any reviews. */
+/// This endpoint returns detailed business content.
+/// 
+/// Note: at this time, the API does not return businesses without any reviews.
 class BusinessDetails {
   /// A list of category title and alias pairs associated with this business.
   final Categories categories;
@@ -115,12 +116,12 @@ class BusinessDetails {
       messaging: Messaging.fromMap(map['messaging']),
       name: map['name'],
       phone: map['phone'],
-      photos: List<String>.from(map['photos']) ?? null,
+      photos: List<String>.from(map['photos']) ?? [],
       price: map['price'],
       rating: map['rating'],
       reviewCount: map['review_count'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']) ?? null,
+      transactions: List<String>.from(map['transactions']) ?? [],
       specialHours: SpecialHoursList.fromList(map['special_hours']),
       attributes: map['attributes'],
     );
