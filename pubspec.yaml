@@ -1,7 +1,7 @@
 name: yelp_fusion_client
-version: 0.1.0
+version: 0.1.0+1
 
-description: A Dart Client to access the endpoints of Yelp Fusion API.
+description: A Dart Client to access the business endpoints of Yelp Fusion API.
 homepage: https://github.com/HelloFro/yelp_fusion_client
 
 environment:
