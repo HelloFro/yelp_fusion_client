@@ -4,6 +4,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
+
+import 'package:yelp_fusion_client/models/business_endpoints/autocomplete.dart';
 import 'package:yelp_fusion_client/models/business_endpoints/business_details.dart';
 
 /// A Dart class to get all the endpoints of the Yelp Fusion API.
@@ -52,5 +54,42 @@ class YelpFusion {
       return asObject ? BusinessDetails.fromJson(response.body) : jsonData;
   }
 
-  
+  /** Get autocomplete suggestions for search keywords, businesses and categories, based on the input text.
+    
+    * text: Required. Text to get autocomplete suggestions for.
+    
+    * latitude: Required.
+    
+    * longitude: Required.
+    
+    * locale: Optional. Default=en_US.
+  */
+  Future fetchAutocomplete(
+    {@required String text,
+    @required double latitude,
+    @required double longitude,
+    String locale,
+    bool asObject = true}
+  ) async {
+    assert(text != null && latitude != null && longitude != null);
+
+    var params = {
+      'text': text,
+      'latitude': latitude.toString(),
+      'longitude': longitude.toString(),
+        if(locale != null)
+          'locale': locale
+    };
+
+    var url = Uri.https('api.yelp.com', 'v3/autocomplete', params);
+
+    final response = await http.get(url, headers: _headers);
+
+    Map<String, dynamic> jsonData = json.decode(response.body);
+
+    if(jsonData.containsKey('error'))
+      return jsonData['error'];
+    else
+      return asObject ? Autocomplete.fromJson(response.body) : jsonData;
+  }
 }
