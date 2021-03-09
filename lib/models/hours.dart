@@ -97,6 +97,37 @@ class Hours {
   }
 }
 
+class HoursList {
+
+  final List<Hours> hours;
+
+  HoursList({
+    this.hours,
+  });
+
+  factory HoursList.fromList(List<dynamic> list) {
+    if (list == null) return null;
+  
+    return HoursList(
+      hours: list.map((x) => Hours.fromMap(x)).toList(),
+    );
+  }
+
+  factory HoursList.fromJson(String source) => HoursList.fromList(json.decode(source));
+
+  @override
+  String toString() => 'HoursList(hours: $hours)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+    final listEquals = const DeepCollectionEquality().equals;
+  
+    return o is HoursList &&
+      listEquals(o.hours, hours);
+  }
+}
+
 /// Out of the ordinary hours for a business that apply on certain dates.
 class SpecialHours {
   /// An ISO8601 date string representing the date for which these special hours apply.
@@ -151,5 +182,36 @@ class SpecialHours {
       o.start == start &&
       o.end == end &&
       o.isOvernight == isOvernight;
+  }
+}
+
+class SpecialHoursList {
+
+  final List<SpecialHours> specialHours;
+
+  SpecialHoursList({
+    this.specialHours,
+  });
+
+  factory SpecialHoursList.fromList(List<dynamic> list) {
+    if (list == null) return null;
+  
+    return SpecialHoursList(
+      specialHours: list.map((x) => SpecialHours.fromMap(x)).toList(),
+    );
+  }
+
+  factory SpecialHoursList.fromJson(String source) => SpecialHoursList.fromList(json.decode(source));
+
+  @override
+  String toString() => 'SpecialHoursList(hours: $specialHours)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+    final listEquals = const DeepCollectionEquality().equals;
+  
+    return o is SpecialHoursList &&
+      listEquals(o.specialHours, specialHours);
   }
 }
