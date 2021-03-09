@@ -52,7 +52,7 @@ class Location {
       address3: map['address3'],
       city: map['city'],
       country: map['country'],
-      crossStreets: map['cross_streets'] ?? null,
+      crossStreets: map['cross_streets'] ?? [],
       displayAddress: List<String>.from(map['display_address']),
       state: map['state'],
       zipCode: map['zip_code'],
