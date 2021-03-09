@@ -11,6 +11,7 @@ class YelpFusion {
   /// Yelp Fusion API Key
   String apiKey;
 
+  /// Headers for Authorization and Content Request Type
   Map<String, String> _headers;
 
   /// Requires API Key, sets GET request headers
@@ -21,14 +22,25 @@ class YelpFusion {
     };
   }
 
-  /// Get rich business data, such as name, address, phone number, photos, Yelp rating, price levels and hours of operation
+  /** Get rich business data, such as name, address, phone number, photos, Yelp rating, price levels and hours of operation.
+    
+    * id: Required. Business id or alias.
+
+    * locale: Optional. Default=en_US.
+  */
   Future fetchBusinessDetails(
     {@required String id,
+    String locale,
     bool asObject = true}
   ) async {
     assert(id != null);
 
-    var url = Uri.https('api.yelp.com', 'v3/businesses/$id');
+    var params = {
+      if(locale != null)
+        'locale': locale,
+    };
+
+    var url = Uri.https('api.yelp.com', 'v3/businesses/$id', params);
 
     final response = await http.get(url, headers: _headers);
 
