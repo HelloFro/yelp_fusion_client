@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-/// Gives details for each Category alias and title.
+import 'package:collection/collection.dart';
+
+/// Gives details for a Category: alias and title.
 class Category {
   /** Alias of a category. When searching for business in certain categories, use alias rather than the title. */
   String alias;
@@ -34,5 +36,37 @@ class Category {
     return o is Category &&
       o.alias == alias &&
       o.title == title;
+  }
+}
+
+/// A list of category title and alias pairs associated with a business.
+class Categories {
+
+  final List<Category> categories;
+
+  Categories({
+    this.categories,
+  });
+
+  factory Categories.fromList(List<dynamic> list) {
+    if (list == null) return null;
+  
+    return Categories(
+      categories: list.map((x) => Category.fromMap(x)).toList(),
+    );
+  }
+
+  factory Categories.fromJson(String source) => Categories.fromList(json.decode(source));
+
+  @override
+  String toString() => 'Categories(categories: $categories)';
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+    final listEquals = const DeepCollectionEquality().equals;
+  
+    return o is Categories &&
+      listEquals(o.categories, categories);
   }
 }
