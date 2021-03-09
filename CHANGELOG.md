@@ -1,3 +1,3 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - Initial Release (9 March 2021)
 
-* TODO: Describe initial release.
+* Comes with Support for Yelp Fusion API Endpoints: `Autocomplete`, `Business Details`, `Business Reviews`, and `Business Search`
