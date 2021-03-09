@@ -12,7 +12,7 @@ import 'package:yelp_fusion_client/models/messaging.dart';
   * Note: at this time, the API does not return businesses without any reviews. */
 class BusinessDetails {
   /// A list of category title and alias pairs associated with this business.
-  final List<Category> categories;
+  final Categories categories;
 
   /// The coordinates of this business.
   final Coordinates coordinates;
@@ -21,7 +21,7 @@ class BusinessDetails {
   final String displayPhone;
 
   /// Opening hours of the business.
-  final Hours hours;
+  final HoursList hours;
 
   /// Unique Yelp ID of this business. ie. '4kMBvIEWPxWkWKFN__8SxQ'
   final String id;
@@ -69,7 +69,7 @@ class BusinessDetails {
   final List<String> transactions;
 
   /// Out of the ordinary hours for the business that apply on certain dates.
-  final SpecialHours specialHours;
+  final SpecialHoursList specialHours;
 
   /// A mapping of attribute names ie. "Ambience" or "Good for Kids", to values. Note: This field will only be visible for Fusion VIP clients granted access to certain attributes.
   final Map<String, dynamic> attributes;
@@ -102,10 +102,10 @@ class BusinessDetails {
     if (map == null) return null;
   
     return BusinessDetails(
-      categories: List<Category>.from(map['categories']),
+      categories: Categories.fromList(map['categories']),
       coordinates: Coordinates.fromMap(map['coordinates']),
       displayPhone: map['display_phone'],
-      hours: Hours.fromMap(map['hours']),
+      hours: HoursList.fromList(map['hours']),
       id: map['id'],
       alias: map['alias'],
       imageUrl: map['image_url'],
@@ -115,14 +115,14 @@ class BusinessDetails {
       messaging: Messaging.fromMap(map['messaging']),
       name: map['name'],
       phone: map['phone'],
-      photos: List<String>.from(map['photos']),
+      photos: List<String>.from(map['photos']) ?? null,
       price: map['price'],
       rating: map['rating'],
       reviewCount: map['review_count'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']),
-      specialHours: SpecialHours.fromMap(map['special_hours']),
-      attributes: Map<String, dynamic>.from(map['attributes']),
+      transactions: List<String>.from(map['transactions']) ?? null,
+      specialHours: SpecialHoursList.fromList(map['special_hours']),
+      attributes: map['attributes'],
     );
   }
 
