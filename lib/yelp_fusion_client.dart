@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:yelp_fusion_client/models/business_endpoints/autocomplete.dart';
 import 'package:yelp_fusion_client/models/business_endpoints/business_details.dart';
+import 'package:yelp_fusion_client/models/business_endpoints/business_reviews.dart';
 import 'package:yelp_fusion_client/models/business_endpoints/business_search.dart';
 
 /// A Dart class to get all the endpoints of the Yelp Fusion API.
@@ -92,6 +93,35 @@ class YelpFusion {
       return jsonData['error'];
     else
       return asObject ? BusinessDetails.fromJson(response.body) : jsonData;
+  }
+
+  /** Get up to three review excerpts, the URL to the full review, the Yelp rating with each review excerpt as well as the name and profile photo of the reviewer.
+    
+    * id: Required. Business id or alias.
+
+    * locale: Optional. Default=en_US.
+  */
+  Future fetchBusinessReviews(
+    {@required String id,
+    String locale,
+    bool asObject = true}
+  ) async {
+    assert(id != null);
+
+    var params = {
+      if(locale != null) 'locale': locale,
+    };
+
+    var url = Uri.https('api.yelp.com', 'v3/businesses/$id/reviews', params);
+
+    final response = await http.get(url, headers: _headers);
+
+    Map<String, dynamic> jsonData = json.decode(response.body);
+
+    if(jsonData.containsKey('error'))
+      return jsonData['error'];
+    else
+      return asObject ? BusinessReviews.fromJson(response.body) : jsonData;
   }
 
   /** Get up to 1000 businesses based on the provided search criteria.
