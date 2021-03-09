@@ -19,14 +19,14 @@ See: [Developer Documentation](https://www.yelp.com/developers/documentation/v3)
 1. Create an Instance of the Client API and Specify Your API Key as the Parameter
 
 ```dart
-  final YelpFusion api = YelpFusion(apiKey: '<Your Yelp Fusion API Key>');
+final YelpFusion api = YelpFusion(apiKey: '<Your Yelp Fusion API Key>');
 ```
 
 1. Use the YelpFusion Object to Access Various Methods
 
 ```dart
-    api.fetchBusinessDetails(id: 'north-india-restaurant-san-francisco', asObject: true)
-    .then((details) => print(details.alias));
+api.fetchBusinessDetails(id: 'north-india-restaurant-san-francisco', asObject: true)
+  .then((details) => print(details.alias));
 ```
 
 *Note : The `asObject` parameter in each method describes whether the method should return data in pure json format or as a dart object which can be used to access individual components of the api response.*
