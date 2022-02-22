@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 
-/** This endpoint returns up to three review excerpts for a given business ordered by Yelp's default sort order.
-  
-  * Note: at this time, the API does not return businesses without any reviews. 
-*/
+/// This endpoint returns up to three review excerpts for a given business ordered by Yelp's default sort order.
+/// 
+/// Note: at this time, the API does not return businesses without any reviews. 
 class BusinessReviews {
   /// The total number of reviews that the business has.
   final int total;

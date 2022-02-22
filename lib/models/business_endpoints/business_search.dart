@@ -6,7 +6,7 @@ import 'package:yelp_fusion_client/models/category.dart';
 import 'package:yelp_fusion_client/models/coordinates.dart';
 import 'package:yelp_fusion_client/models/location.dart';
 
-/** Use Business Search endpoint when you have general info on the biz like name & location but don't know the address. */
+/// Use Business Search endpoint when you have general info on the biz like name & location but don't know the address.
 class BusinessSearch {
   /// Total number of business
   final int total;
@@ -60,13 +60,19 @@ class BusinessSearched {
   /// Phone number of the business formatted nicely to be displayed to users.
   final String displayPhone;
 
-  /// Distance in meters from the search location. Note: meters regardless of the locale.
+  /// Distance in meters from the search location. 
+  /// 
+  /// Note: meters regardless of the locale.
   final double distance;
 
-  /// Unique Yelp ID of this business, ie. '4kMBvIEWPxWkWKFN__8SxQ'
+  /// Unique Yelp ID of this business.
+  /// 
+  /// ie. '4kMBvIEWPxWkWKFN__8SxQ'
   final String id;
 
-  /// Unique Yelp alias of this business. Can contain unicode characters. ie. 'yelp-san-francisco'
+  /// Unique Yelp alias of this business. Can contain unicode characters.
+  /// 
+  /// ie. 'yelp-san-francisco'
   final String alias;
 
   /// URL of photo for this business.
