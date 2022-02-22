@@ -39,7 +39,7 @@ class YelpFusion {
     {required String text,
     required double latitude,
     required double longitude,
-    String? locale, // TODO: Set to default locale
+    String locale = "en_US",
     bool asObject = true}
   ) async {
 
@@ -47,8 +47,7 @@ class YelpFusion {
       'text': text,
       'latitude': latitude.toString(),
       'longitude': longitude.toString(),
-        if(locale != null)
-          'locale': locale
+      'locale': locale,
     };
 
     var url = Uri.https('api.yelp.com', 'v3/autocomplete', params);
@@ -70,13 +69,12 @@ class YelpFusion {
   /// locale: Optional. `Default=en_US.`
   Future fetchBusinessDetails(
     {required String id,
-    String? locale,
+    String locale = "en_US",
     bool asObject = true}
   ) async {
 
     var params = {
-      if(locale != null)
-        'locale': locale,
+      'locale': locale,
     };
 
     var url = Uri.https('api.yelp.com', 'v3/businesses/$id', params);
@@ -98,12 +96,12 @@ class YelpFusion {
   /// locale: Optional. `Default=en_US.`
   Future fetchBusinessReviews(
     {required String id,
-    String? locale,
+    String locale = "en_US",
     bool asObject = true}
   ) async {
 
     var params = {
-      if(locale != null) 'locale': locale,
+      'locale': locale,
     };
 
     var url = Uri.https('api.yelp.com', 'v3/businesses/$id/reviews', params);
@@ -176,13 +174,13 @@ class YelpFusion {
     String? attributes,
     bool asObject = true}
   ) async {
-    assert(latitude != null && longitude != null || location != null);
+    assert(latitude != null && longitude != null && location == null || location != null && latitude == null && longitude == null);
 
     var params = {
       if(term != null) 'term': term,
-      if(location != null) 'location': location,
-      if(latitude != null) 'latitude': latitude.toString(),
-      if(longitude != null) 'longitude': longitude.toString(),
+      if(latitude == null && longitude == null) 'location': location,
+      if(location == null) 'latitude': latitude.toString(),
+      if(location == null) 'longitude': longitude.toString(),
       if(radius != null) 'radius': radius.toString(),
       if(categories != null) 'categories': categories,
       if(locale != null) 'locale': locale,
