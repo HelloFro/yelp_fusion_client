@@ -13,71 +13,71 @@ import 'package:yelp_fusion_client/models/messaging.dart';
 /// Note: at this time, the API does not return businesses without any reviews.
 class BusinessDetails {
   /// A list of category title and alias pairs associated with this business.
-  final Categories categories;
+  final Categories? categories;
 
   /// The coordinates of this business.
-  final Coordinates coordinates;
+  final Coordinates? coordinates;
 
   /// Phone number of the business formatted nicely to be displayed to users. The format is the standard phone number format for the business's country.
-  final String displayPhone;
+  final String? displayPhone;
 
   /// Opening hours of the business.
-  final HoursList hours;
+  final HoursList? hours;
 
   /// Unique Yelp ID of this business.
   /// 
   /// ie. '4kMBvIEWPxWkWKFN__8SxQ'
-  final String id;
+  final String? id;
 
   /// Unique Yelp alias of this business. Can contain unicode characters.
   /// 
   /// ie. 'yelp-san-francisco'. 
-  final String alias;
+  final String? alias;
 
   /// URL of photo for this business.
-  final String imageUrl;
+  final String? imageUrl;
 
   /// Whether business has been claimed by a business owner
-  final bool isClaimed;
+  final bool? isClaimed;
 
   /// Whether business has been (permanently) closed
-  final bool isClosed;
+  final bool? isClosed;
 
   /// The location of this business, including address, city, state, zip code and country.
-  final Location location;
+  final Location? location;
 
   /// Contains Business Messaging / Request a Quote information for this business. Note: This field only appears in the response for businesses that have messaging enabled.
-  final Messaging messaging;
+  final Messaging? messaging;
 
   /// Name of this business.
-  final String name;
+  final String? name;
 
   /// Phone number of the business.
-  final String phone;
+  final String? phone;
 
   /// URLs of up to three photos of the business.
-  final List<String> photos;
+  final List<String>? photos;
 
   /// Price level of the business ie. $, $$, $$$ or $$$$.
-  final String price;
+  final String? price;
 
   /// Rating for this business ie. 1, 1.5, ... 4.5, 5.
-  final double rating;
+  final double? rating;
 
   /// Number of reviews for this business.
-  final int reviewCount;
+  final int? reviewCount;
 
   /// URL for business page on Yelp.
-  final String url;
+  final String? url;
 
   /// A list of Yelp transactions that the business is registered for. Current supported values are "pickup", "delivery", and "restaurant_reservation".
-  final List<String> transactions;
+  final List<String>? transactions;
 
   /// Out of the ordinary hours for the business that apply on certain dates.
-  final SpecialHoursList specialHours;
+  final SpecialHoursList? specialHours;
 
   /// A mapping of attribute names ie. "Ambience" or "Good for Kids", to values. Note: This field will only be visible for Fusion VIP clients granted access to certain attributes.
-  final Map<String, dynamic> attributes;
+  final Map<String, dynamic>? attributes;
 
   BusinessDetails({
     this.categories,
@@ -103,8 +103,8 @@ class BusinessDetails {
     this.attributes,
   });
 
-  factory BusinessDetails.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory BusinessDetails.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return BusinessDetails();
   
     return BusinessDetails(
       categories: Categories.fromList(map['categories']),
@@ -120,12 +120,12 @@ class BusinessDetails {
       messaging: Messaging.fromMap(map['messaging']),
       name: map['name'],
       phone: map['phone'],
-      photos: List<String>.from(map['photos']) ?? [],
+      photos: List<String>.from(map['photos']), // ?? [],
       price: map['price'],
       rating: map['rating'],
       reviewCount: map['review_count'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']) ?? [],
+      transactions: List<String>.from(map['transactions']), // ?? [],
       specialHours: SpecialHoursList.fromList(map['special_hours']),
       attributes: map['attributes'],
     );

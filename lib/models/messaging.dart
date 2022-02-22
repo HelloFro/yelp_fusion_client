@@ -3,22 +3,22 @@ import 'dart:convert';
 /// Contains Business Messaging / Request a Quote information for a business.
 class Messaging {
   /// Action Link URL that drops user directly in to the messaging flow for a business.
-  final String url;
+  final String? url;
 
   /// Indicates what kind of messaging can be done with a business, ie. 
   ///   * "Request a Quote" for a home services business 
   ///   * "Request a Consultation" for a legal services business
   ///  
   ///   Note: Text will be localized based on the "locale" input parameter.
-  final String useCaseText;
+  final String? useCaseText;
 
   Messaging({
     this.url,
     this.useCaseText,
   });
 
-  factory Messaging.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Messaging.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Messaging();
   
     return Messaging(
       url: map['url'],

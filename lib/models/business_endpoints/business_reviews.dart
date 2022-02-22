@@ -7,13 +7,13 @@ import 'package:collection/collection.dart';
 /// Note: at this time, the API does not return businesses without any reviews. 
 class BusinessReviews {
   /// The total number of reviews that the business has.
-  final int total;
+  final int? total;
 
   /// A list of languages for which the business has at least one review.
-  final List<String> possibleLanguages;
+  final List<String>? possibleLanguages;
 
   /// A list of up to three reviews of this business.
-  final List<Review> reviews;
+  final List<Review>? reviews;
 
   BusinessReviews({
     this.total,
@@ -21,8 +21,8 @@ class BusinessReviews {
     this.reviews,
   });
 
-  factory BusinessReviews.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory BusinessReviews.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return BusinessReviews();
   
     return BusinessReviews(
       total: map['total'],
@@ -51,22 +51,22 @@ class BusinessReviews {
 /// A reviews of a business.
 class Review {
   /// A unique identifier for this review.
-  final String id;
+  final String? id;
 
   /// Text excerpt of this review.
-  final String text;
+  final String? text;
 
   /// URL of this review.
-  final String url;
+  final String? url;
 
   /// Rating of this review.
-  final int rating;
+  final int? rating;
 
   /// The time that the review was created in PST.
-  final String timeCreated;
+  final String? timeCreated;
 
   /// The user who wrote the review.
-  final User user;
+  final User? user;
 
   Review({
     this.id,
@@ -77,8 +77,8 @@ class Review {
     this.user,
   });
 
-  factory Review.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Review.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Review();
   
     return Review(
       id: map['id'],
@@ -114,16 +114,16 @@ class Review {
 /// The User Who created a review
 class User {
   /// Yelp ID of the user.
-  final String id;
+  final String? id;
 
   /// URL of the user's Yelp profile.
-  final String profileUrl;
+  final String? profileUrl;
 
   /// User screen name ie. first name and first initial of last name.
-  final String name;
+  final String? name;
 
   /// URL of the user's profile photo.
-  final String imageUrl;
+  final String? imageUrl;
 
   User({
     this.id,
@@ -132,8 +132,8 @@ class User {
     this.imageUrl,
   });
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory User.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return User();
   
     return User(
       id: map['id'],

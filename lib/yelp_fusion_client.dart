@@ -16,10 +16,10 @@ class YelpFusion {
   String apiKey;
 
   /// Headers for Authorization and Content Request Type
-  Map<String, String> _headers;
+  Map<String, String>? _headers;
 
   /// **Requires** API Key. Sets GET request headers.
-  YelpFusion({@required this.apiKey}) : assert(apiKey != null) {
+  YelpFusion({required this.apiKey}) {
     _headers = {
       'Authorization': 'Bearer $apiKey',
       "Content-type": "application/json",
@@ -36,13 +36,12 @@ class YelpFusion {
   /// 
   /// locale: Optional. `Default=en_US.`
   Future fetchAutocomplete(
-    {@required String text,
-    @required double latitude,
-    @required double longitude,
-    String locale,
+    {required String text,
+    required double latitude,
+    required double longitude,
+    String? locale, // TODO: Set to default locale
     bool asObject = true}
   ) async {
-    assert(text != null && latitude != null && longitude != null);
 
     var params = {
       'text': text,
@@ -70,11 +69,10 @@ class YelpFusion {
   /// 
   /// locale: Optional. `Default=en_US.`
   Future fetchBusinessDetails(
-    {@required String id,
-    String locale,
+    {required String id,
+    String? locale,
     bool asObject = true}
   ) async {
-    assert(id != null);
 
     var params = {
       if(locale != null)
@@ -99,11 +97,10 @@ class YelpFusion {
   /// 
   /// locale: Optional. `Default=en_US.`
   Future fetchBusinessReviews(
-    {@required String id,
-    String locale,
+    {required String id,
+    String? locale,
     bool asObject = true}
   ) async {
-    assert(id != null);
 
     var params = {
       if(locale != null) 'locale': locale,
@@ -163,20 +160,20 @@ class YelpFusion {
   /// attributes: Optional. 
   /// Additional filters to get specific search results.
   Future fetchBusinessSearch(
-    {String term,
-    String location,
-    double latitude,
-    double longitude,
-    int radius,
-    String categories,
-    String locale,
-    int limit,
-    int offset,
-    String sortBy,
-    String price,
-    bool openNow,
-    int openAt,
-    String attributes,
+    {String? term,
+    String? location,
+    double? latitude,
+    double? longitude,
+    int? radius,
+    String? categories,
+    String? locale,
+    int? limit,
+    int? offset,
+    String? sortBy,
+    String? price,
+    bool? openNow,
+    int? openAt,
+    String? attributes,
     bool asObject = true}
   ) async {
     assert(latitude != null && longitude != null || location != null);
