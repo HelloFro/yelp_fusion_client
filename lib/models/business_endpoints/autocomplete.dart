@@ -6,9 +6,9 @@ import 'package:yelp_fusion_client/models/category.dart';
 
 class Autocomplete {
 
-  final BusinessesAutocompleted businesses;
-  final Categories categories;
-  final Terms terms;
+  final BusinessesAutocompleted? businesses;
+  final Categories? categories;
+  final Terms? terms;
 
   Autocomplete({
     this.businesses,
@@ -16,8 +16,8 @@ class Autocomplete {
     this.terms,
   });
 
-  factory Autocomplete.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Autocomplete.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Autocomplete();
   
     return Autocomplete(
       businesses: BusinessesAutocompleted.fromList(map['businesses']),
@@ -44,17 +44,17 @@ class Autocomplete {
 
 class BusinessAutocompleted {
 
-  final String name;
+  final String? name;
 
-  final String id;
+  final String? id;
 
   BusinessAutocompleted({
     this.name,
     this.id,
   });
 
-  factory BusinessAutocompleted.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory BusinessAutocompleted.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return BusinessAutocompleted();
   
     return BusinessAutocompleted(
       name: map['name'],
@@ -79,14 +79,14 @@ class BusinessAutocompleted {
 
 class BusinessesAutocompleted {
 
-  final List<BusinessAutocompleted> businesses;
+  final List<BusinessAutocompleted>? businesses;
 
   BusinessesAutocompleted({
     this.businesses,
   });
 
-  factory BusinessesAutocompleted.fromList(List<dynamic> list) {
-    if (list == null) return null;
+  factory BusinessesAutocompleted.fromList(List<dynamic>? list) {
+    if (list == null) return BusinessesAutocompleted();
   
     return BusinessesAutocompleted(
       businesses: list.map((x) => BusinessAutocompleted.fromMap(x)).toList(),
@@ -110,14 +110,14 @@ class BusinessesAutocompleted {
 
 class Terms {
 
-  final List<dynamic> text;
+  final List<dynamic>? text;
 
   Terms({
     this.text,
   });
 
-  factory Terms.fromList(List<dynamic> list) {
-    if (list == null) return null;
+  factory Terms.fromList(List<dynamic>? list) {
+    if (list == null) return Terms();
   
     return Terms(
       text: list.map((x) => x['text']).toList(),
