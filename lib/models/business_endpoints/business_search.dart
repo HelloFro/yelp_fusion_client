@@ -9,13 +9,13 @@ import 'package:yelp_fusion_client/models/location.dart';
 /** Use Business Search endpoint when you have general info on the biz like name & location but don't know the address. */
 class BusinessSearch {
   /// Total number of business
-  final int total;
+  final int? total;
 
   /// List of business Yelp finds based on the search criteria.
-  final BusinessesSearched businesses;
+  final BusinessesSearched? businesses;
 
   /// Suggested area in a map to display results in.
-  final Region region;
+  final Region? region;
 
   BusinessSearch({
     this.total,
@@ -23,8 +23,8 @@ class BusinessSearch {
     this.region,
   });
 
-  factory BusinessSearch.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory BusinessSearch.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return BusinessSearch();
   
     return BusinessSearch(
       total: map['total'],
@@ -52,49 +52,49 @@ class BusinessSearch {
 /// Business Yelp found based on the search criteria.
 class BusinessSearched {
   /// List of category title and alias pairs associated with this business.
-  final Categories categories;
+  final Categories? categories;
 
   /// Coordinates of this business.
-  final Coordinates coordinates;
+  final Coordinates? coordinates;
 
   /// Phone number of the business formatted nicely to be displayed to users.
-  final String displayPhone;
+  final String? displayPhone;
 
   /// Distance in meters from the search location. Note: meters regardless of the locale.
-  final double distance;
+  final double? distance;
 
   /// Unique Yelp ID of this business, ie. '4kMBvIEWPxWkWKFN__8SxQ'
-  final String id;
+  final String? id;
 
   /// Unique Yelp alias of this business. Can contain unicode characters. ie. 'yelp-san-francisco'
-  final String alias;
+  final String? alias;
 
   /// URL of photo for this business.
-  final String imageUrl;
+  final String? imageUrl;
 
   /// Location of this business, including address, city, state, zip code and country.
-  final Location location;
+  final Location? location;
 
   /// Name of this business.
-  final String name;
+  final String? name;
 
   /// Phone number of the business.
-  final String phone;
+  final String? phone;
 
   /// Price level of the business, ie. $, $$, $$$ or $$$$.
-  final String price;
+  final String? price;
 
   /// Rating for this business, ie. 1, 1.5, ... 4.5, 5.
-  final double rating;
+  final double? rating;
 
   /// Number of reviews for this business.
-  final int reviewCount;
+  final int? reviewCount;
 
   /// URL for business page on Yelp.
-  final String url;
+  final String? url;
 
   /// List of Yelp transactions that the business is registered for. ie. pickup, delivery, or restaurant_reservation.
-  final List<String> transactions;
+  final List<String>? transactions;
 
   BusinessSearched({
     this.categories,
@@ -114,8 +114,8 @@ class BusinessSearched {
     this.transactions,
   });
 
-  factory BusinessSearched.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory BusinessSearched.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return BusinessSearched();
   
     return BusinessSearched(
       categories: Categories.fromList(map['categories']),
@@ -170,14 +170,14 @@ class BusinessSearched {
 /// List of business Yelp finds based on the search criteria.
 class BusinessesSearched {
 
-  final List<BusinessSearched> businesses;
+  final List<BusinessSearched>? businesses;
 
   BusinessesSearched({
     this.businesses,
   });
 
-  factory BusinessesSearched.fromList(List<dynamic> list) {
-    if (list == null) return null;
+  factory BusinessesSearched.fromList(List<dynamic>? list) {
+    if (list == null) return BusinessesSearched();
   
     return BusinessesSearched(
       businesses: list.map((x) => BusinessSearched.fromMap(x)).toList(),
@@ -202,14 +202,14 @@ class BusinessesSearched {
 /// Suggested area in a map to display results in.
 class Region {
   /// Center position of map area.
-  final Coordinates center;
+  final Coordinates? center;
 
   Region({
     this.center,
   });
 
-  factory Region.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Region.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Region();
   
     return Region(
       center: Coordinates.fromMap(map['center']),

@@ -5,16 +5,16 @@ import 'package:collection/collection.dart';
 /// The detailed opening hours of a given day in a week.
 class Open {
   /// From 0 to 6, representing day of the week from Monday to Sunday.
-  final int day;
+  final int? day;
 
   /// Start of the opening hours in a day, in 24-hour clock notation ie. 1000 == 10:00 AM.
-  final String start;
+  final String? start;
 
   /// End of the opening hours in a day, in 24-hour clock notation ie. 2130 == 9:30 PM.
-  final String end;
+  final String? end;
 
   /// Whether the business opens overnight or not. Note: When this is true, the end time will be lower than the start time.
-  final bool isOvernight;
+  final bool? isOvernight;
 
   Open({
     this.day,
@@ -23,8 +23,8 @@ class Open {
     this.isOvernight,
   });
 
-  factory Open.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Open.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Open();
   
     return Open(
       day: map['day'],
@@ -56,13 +56,13 @@ class Open {
 /// Opening hours of the business.
 class Hours {
   /// Whether the business is currently open or not.
-  final bool isOpenNow;
+  final bool? isOpenNow;
 
   /** The type of the opening hours information. Note: Currently, this is always REGULAR. */
-  final String hoursType;
+  final String? hoursType;
 
   /// The detailed opening hours of each day in a week.
-  final List<Open> open;
+  final List<Open>? open;
 
   Hours({
     this.isOpenNow,
@@ -70,8 +70,8 @@ class Hours {
     this.open,
   });
 
-  factory Hours.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Hours.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Hours();
   
     return Hours(
       isOpenNow: map['is_open_now'],
@@ -99,14 +99,14 @@ class Hours {
 
 class HoursList {
 
-  final List<Hours> hours;
+  final List<Hours>? hours;
 
   HoursList({
     this.hours,
   });
 
-  factory HoursList.fromList(List<dynamic> list) {
-    if (list == null) return null;
+  factory HoursList.fromList(List<dynamic>? list) {
+    if (list == null) return HoursList();
   
     return HoursList(
       hours: list.map((x) => Hours.fromMap(x)).toList(),
@@ -131,19 +131,19 @@ class HoursList {
 /// Out of the ordinary hours for a business that apply on certain dates.
 class SpecialHours {
   /// An ISO8601 date string representing the date for which these special hours apply.
-  final String date;
+  final String? date;
 
   /// Whether this particular special hour represents a date where a business is closed.
-  final bool isClosed;
+  final bool? isClosed;
 
   /// Start of the opening hours in a day, in 24-hour clock notation ie. 1000 == 10:00 AM.
-  final String start;
+  final String? start;
 
   /// End of the opening hours in a day, in 24-hour clock notation ie. 2130 == 9:30 PM.
-  final String end;
+  final String? end;
 
   /// Whether the special hours time range spans past midnight or not. Note: When this is true, the end time will be lower than the start time.
-  final bool isOvernight;
+  final bool? isOvernight;
 
   SpecialHours({
     this.date,
@@ -153,8 +153,8 @@ class SpecialHours {
     this.isOvernight,
   });
 
-  factory SpecialHours.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory SpecialHours.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return SpecialHours();
   
     return SpecialHours(
       date: map['date'],
@@ -187,14 +187,14 @@ class SpecialHours {
 
 class SpecialHoursList {
 
-  final List<SpecialHours> specialHours;
+  final List<SpecialHours>? specialHours;
 
   SpecialHoursList({
     this.specialHours,
   });
 
-  factory SpecialHoursList.fromList(List<dynamic> list) {
-    if (list == null) return null;
+  factory SpecialHoursList.fromList(List<dynamic>? list) {
+    if (list == null) return SpecialHoursList();
   
     return SpecialHoursList(
       specialHours: list.map((x) => SpecialHours.fromMap(x)).toList(),

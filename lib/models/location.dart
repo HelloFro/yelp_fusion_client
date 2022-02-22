@@ -5,31 +5,31 @@ import 'package:collection/collection.dart';
 /// The location of a business, including address, city, state, zip code and country.
 class Location {
   /// Street address of a business.
-  final String address1;
+  final String? address1;
 
   /// Street address of a business, continued.
-  final String address2;
+  final String? address2;
 
   /// Street address of a business, continued.
-  final String address3;
+  final String? address3;
 
   /// City of a business.
-  final String city;
+  final String? city;
 
   /// ISO 3166-1 alpha-2 country code of a business.
-  final String country;
+  final String? country;
 
   /// Cross streets for a business.
-  final String crossStreets;
+  final String? crossStreets;
 
   /// Array of strings that if organized vertically give an address that is in the standard address format for the business's country.
-  final List<String> displayAddress;
+  final List<String>? displayAddress;
 
   /// ISO 3166-2 (with a few exceptions) state code of a business.
-  final String state;
+  final String? state;
 
   /// Zip code of a business.
-  final String zipCode;
+  final String? zipCode;
 
   Location({
     this.address1,
@@ -43,8 +43,8 @@ class Location {
     this.zipCode,
   });
 
-  factory Location.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Location.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Location();
   
     return Location(
       address1: map['address1'],
