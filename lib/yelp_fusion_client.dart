@@ -18,7 +18,7 @@ class YelpFusion {
   /// Headers for Authorization and Content Request Type
   Map<String, String>? _headers;
 
-  /// Requires API Key, sets GET request headers
+  /// **Requires** API Key. Sets GET request headers.
   YelpFusion({required this.apiKey}) {
     _headers = {
       'Authorization': 'Bearer $apiKey',
@@ -26,16 +26,15 @@ class YelpFusion {
     };
   }
 
-  /** Get autocomplete suggestions for search keywords, businesses and categories, based on the input text.
-    
-    * text: Required. Text to get autocomplete suggestions for.
-    
-    * latitude: Required.
-    
-    * longitude: Required.
-    
-    * locale: Optional. Default=en_US.
-  */
+  /// Get autocomplete suggestions for search keywords, businesses and categories, based on the input text.
+  ///
+  /// text: **Required.** Text to get autocomplete suggestions for.
+  /// 
+  /// latitude: **Required.**
+  /// 
+  /// longitude: **Required.**
+  /// 
+  /// locale: Optional. `Default=en_US.`
   Future fetchAutocomplete(
     {required String text,
     required double latitude,
@@ -64,12 +63,11 @@ class YelpFusion {
       return asObject ? Autocomplete.fromJson(response.body) : jsonData;
   }
 
-  /** Get rich business data, such as name, address, phone number, photos, Yelp rating, price levels and hours of operation.
-    
-    * id: Required. Business id or alias.
-
-    * locale: Optional. Default=en_US.
-  */
+  /// Get rich business data, such as name, address, phone number, photos, Yelp rating, price levels and hours of operation.
+  ///  
+  /// id: **Required.** Business id or alias.
+  /// 
+  /// locale: Optional. `Default=en_US.`
   Future fetchBusinessDetails(
     {required String id,
     String? locale,
@@ -93,12 +91,11 @@ class YelpFusion {
       return asObject ? BusinessDetails.fromJson(response.body) : jsonData;
   }
 
-  /** Get up to three review excerpts, the URL to the full review, the Yelp rating with each review excerpt as well as the name and profile photo of the reviewer.
-    
-    * id: Required. Business id or alias.
-
-    * locale: Optional. Default=en_US.
-  */
+  /// Get up to three review excerpts, the URL to the full review, the Yelp rating with each review excerpt as well as the name and profile photo of the reviewer.
+  /// 
+  /// id: **Required.** Business id or alias.
+  /// 
+  /// locale: Optional. `Default=en_US.`
   Future fetchBusinessReviews(
     {required String id,
     String? locale,
@@ -121,39 +118,47 @@ class YelpFusion {
       return asObject ? BusinessReviews.fromJson(response.body) : jsonData;
   }
 
-  /** Get up to 1000 businesses based on the provided search criteria.
-    
-    * term: Optional. Search term, ie. "food" or "restaurants".
-
-    * location: Required if either latitude or longitude is not provided. 
-    * ie. "New York City", "NYC", "350 5th Ave, New York, NY 10118". 
-    
-    * latitude: Required if location is not provided.
-
-    * longitude: Required if location is not provided.
-
-    * radius: Optional. A suggested search radius in meters.
-
-    * categories: Optional. Categories to filter the search results with.
-
-    * locale: Optional. Default=en_US.
-
-    * limit: Optional. Number of business results to get. Default=20.
-
-    * offset: Optional. Offset the list of returned business results by this amount.
-
-    * sortBy: Optional. Suggestion to the search algorithm that the results be sorted by, 
-    * ie. best_match, rating, review_count or distance. Default=best_match.
-
-    * price: Optional. Pricing levels to filter the search result, ie. 1 = $, 2 = $$, 3 = $$$, 4 = $$$$.
-
-    * openNow: Optional. Only get the businesses open now. Default=false.
-
-    * openAt: Optional. An integer representing the Unix time in the same timezone of the search location. 
-    * Note: open_at and open_now cannot be used together.
-
-    * attributes: Optional. Additional filters to get specific search results.
-  */
+  /// Get up to 1000 businesses based on the provided search criteria.
+  ///  
+  /// term: Optional. Search term, ie. "food" or "restaurants".
+  /// 
+  /// location: Required if either latitude or longitude is not provided.
+  /// 
+  /// `ie. "New York City", "NYC", "350 5th Ave, New York, NY 10118".`
+  ///  
+  /// latitude: Required if location is not provided.
+  /// 
+  /// longitude: Required if location is not provided.
+  /// 
+  /// radius: Optional. A suggested search radius in meters.
+  /// 
+  /// categories: Optional. Categories to filter the search results with.
+  /// 
+  /// locale: Optional. `Default=en_US.`
+  /// 
+  /// limit: Optional. Number of business results to get. `Default=20.`
+  /// 
+  /// offset: Optional. 
+  /// Offset the list of returned business results by this amount.
+  /// 
+  /// sortBy: Optional. 
+  /// Suggestion to the search algorithm that the results be sorted by, 
+  ///
+  /// ie. best_match, rating, review_count or distance. `Default=best_match.`
+  /// 
+  /// price: Optional. 
+  /// Pricing levels to filter the search result ie. 1 = $, 2 = $$, 3 = $$$, 4 = $$$$.
+  /// 
+  /// openNow: Optional. 
+  /// Only get the businesses open now. `Default=false.`
+  /// 
+  /// openAt: Optional. 
+  /// An integer representing the Unix time in the same timezone of the search location. 
+  /// 
+  /// **Note: openAt and openNow cannot be used together.**
+  /// 
+  /// attributes: Optional. 
+  /// Additional filters to get specific search results.
   Future fetchBusinessSearch(
     {String? term,
     String? location,

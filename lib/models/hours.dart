@@ -7,13 +7,19 @@ class Open {
   /// From 0 to 6, representing day of the week from Monday to Sunday.
   final int? day;
 
-  /// Start of the opening hours in a day, in 24-hour clock notation ie. 1000 == 10:00 AM.
+  /// Start of the opening hours in a day, in 24-hour clock notation 
+  /// 
+  /// ie. 1000 == 10:00 AM.
   final String? start;
 
-  /// End of the opening hours in a day, in 24-hour clock notation ie. 2130 == 9:30 PM.
+  /// End of the opening hours in a day, in 24-hour clock notation 
+  /// 
+  /// ie. 2130 == 9:30 PM.
   final String? end;
 
-  /// Whether the business opens overnight or not. Note: When this is true, the end time will be lower than the start time.
+  /// Whether the business opens overnight or not. 
+  /// 
+  /// Note: When this is true, the end time will be lower than the start time.
   final bool? isOvernight;
 
   Open({
@@ -58,7 +64,9 @@ class Hours {
   /// Whether the business is currently open or not.
   final bool? isOpenNow;
 
-  /** The type of the opening hours information. Note: Currently, this is always REGULAR. */
+  /// The type of the opening hours information. 
+  /// 
+  /// Note: Currently, this is always REGULAR.
   final String? hoursType;
 
   /// The detailed opening hours of each day in a week.

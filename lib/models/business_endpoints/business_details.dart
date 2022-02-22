@@ -24,10 +24,14 @@ class BusinessDetails {
   /// Opening hours of the business.
   final HoursList? hours;
 
-  /// Unique Yelp ID of this business. ie. '4kMBvIEWPxWkWKFN__8SxQ'
+  /// Unique Yelp ID of this business.
+  /// 
+  /// ie. '4kMBvIEWPxWkWKFN__8SxQ'
   final String? id;
 
-  /// Unique Yelp alias of this business. Can contain unicode characters. ie. 'yelp-san-francisco'. 
+  /// Unique Yelp alias of this business. Can contain unicode characters.
+  /// 
+  /// ie. 'yelp-san-francisco'. 
   final String? alias;
 
   /// URL of photo for this business.

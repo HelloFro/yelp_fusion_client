@@ -4,7 +4,9 @@ import 'package:collection/collection.dart';
 
 /// Gives details for a Category: alias and title.
 class Category {
-  /** Alias of a category. When searching for business in certain categories, use alias rather than the title. */
+  /// Alias of a category. 
+  ///
+  /// When searching for business in certain categories, use alias rather than the title.
   String? alias;
 
   /// Title of a category for display purpose.
