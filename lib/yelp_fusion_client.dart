@@ -39,7 +39,7 @@ class YelpFusion {
     {required String text,
     required double latitude,
     required double longitude,
-    String? locale, // TODO: Set to default locale
+    String locale = "en_US",
     bool asObject = true}
   ) async {
 
@@ -47,8 +47,7 @@ class YelpFusion {
       'text': text,
       'latitude': latitude.toString(),
       'longitude': longitude.toString(),
-        if(locale != null)
-          'locale': locale
+      'locale': locale,
     };
 
     var url = Uri.https('api.yelp.com', 'v3/autocomplete', params);
