@@ -138,7 +138,7 @@ class BusinessSearched {
       rating: map['rating'],
       reviewCount: map['reviewCount'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']) ?? [],
+      transactions: List<String>.from(map['transactions']),
     );
   }
 
