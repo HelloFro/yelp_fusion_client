@@ -3,7 +3,6 @@ library yelp_fusion_client;
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:meta/meta.dart';
 
 import 'package:yelp_fusion_client/models/business_endpoints/autocomplete.dart';
 import 'package:yelp_fusion_client/models/business_endpoints/business_details.dart';
