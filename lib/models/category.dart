@@ -5,18 +5,18 @@ import 'package:collection/collection.dart';
 /// Gives details for a Category: alias and title.
 class Category {
   /** Alias of a category. When searching for business in certain categories, use alias rather than the title. */
-  String alias;
+  String? alias;
 
   /// Title of a category for display purpose.
-  String title;
+  String? title;
 
   Category({
     this.alias,
     this.title,
   });
 
-  factory Category.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
+  factory Category.fromMap(Map<String, dynamic>? map) {
+    if (map == null) return Category();
   
     return Category(
       alias: map['alias'],
@@ -42,14 +42,14 @@ class Category {
 /// A list of category title and alias pairs associated with a business.
 class Categories {
 
-  final List<Category> categories;
+  final List<Category>? categories;
 
   Categories({
     this.categories,
   });
 
-  factory Categories.fromList(List<dynamic> list) {
-    if (list == null) return null;
+  factory Categories.fromList(List<dynamic>? list) {
+    if (list == null) return Categories();
   
     return Categories(
       categories: list.map((x) => Category.fromMap(x)).toList(),
