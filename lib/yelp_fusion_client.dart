@@ -96,12 +96,12 @@ class YelpFusion {
   /// locale: Optional. `Default=en_US.`
   Future fetchBusinessReviews(
     {required String id,
-    String? locale,
+    String locale = "en_US",
     bool asObject = true}
   ) async {
 
     var params = {
-      if(locale != null) 'locale': locale,
+      'locale': locale,
     };
 
     var url = Uri.https('api.yelp.com', 'v3/businesses/$id/reviews', params);
