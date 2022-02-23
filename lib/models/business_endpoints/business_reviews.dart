@@ -37,15 +37,19 @@ class BusinessReviews {
   String toString() => 'BusinessReviews(total: $total, possibleLanguages: $possibleLanguages, reviews: $reviews)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is BusinessReviews &&
-      o.total == total &&
-      listEquals(o.possibleLanguages, possibleLanguages) &&
-      listEquals(o.reviews, reviews);
+    return other is BusinessReviews &&
+      other.total == total &&
+      listEquals(other.possibleLanguages, possibleLanguages) &&
+      listEquals(other.reviews, reviews);
   }
+
+  @override
+  int get hashCode => Object.hash(total, possibleLanguages, reviews);
+
 }
 
 /// A reviews of a business.
@@ -98,17 +102,21 @@ class Review {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Review &&
-      o.id == id &&
-      o.text == text &&
-      o.url == url &&
-      o.rating == rating &&
-      o.timeCreated == timeCreated &&
-      o.user == user;
+    return other is Review &&
+      other.id == id &&
+      other.text == text &&
+      other.url == url &&
+      other.rating == rating &&
+      other.timeCreated == timeCreated &&
+      other.user == user;
   }
+
+  @override
+  int get hashCode => Object.hash(id, text, url, rating, timeCreated, user);
+
 }
 
 /// The User Who created a review
@@ -151,13 +159,17 @@ class User {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is User &&
-      o.id == id &&
-      o.profileUrl == profileUrl &&
-      o.name == name &&
-      o.imageUrl == imageUrl;
+    return other is User &&
+      other.id == id &&
+      other.profileUrl == profileUrl &&
+      other.name == name &&
+      other.imageUrl == imageUrl;
   }
+
+  @override
+  int get hashCode => Object.hash(id, profileUrl, name, imageUrl);
+
 }

@@ -32,13 +32,17 @@ class Category {
   String toString() => 'Category(alias: $alias, title: $title)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Category &&
-      o.alias == alias &&
-      o.title == title;
+    return other is Category &&
+      other.alias == alias &&
+      other.title == title;
   }
+
+  @override
+  int get hashCode => Object.hash(alias, title);
+
 }
 
 /// A list of category title and alias pairs associated with a business.
@@ -64,11 +68,15 @@ class Categories {
   String toString() => 'Categories(categories: $categories)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is Categories &&
-      listEquals(o.categories, categories);
+    return other is Categories &&
+      listEquals(other.categories, categories);
   }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, categories);
+
 }

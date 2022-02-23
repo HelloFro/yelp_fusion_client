@@ -39,14 +39,18 @@ class BusinessSearch {
   String toString() => 'BusinessSearch(total: $total, businesses: $businesses, region: $region)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is BusinessSearch &&
-      o.total == total &&
-      o.businesses == businesses &&
-      o.region == region;
+    return other is BusinessSearch &&
+      other.total == total &&
+      other.businesses == businesses &&
+      other.region == region;
   }
+
+  @override
+  int get hashCode => Object.hash(total, businesses, region);
+
 }
 
 /// Business Yelp found based on the search criteria.
@@ -150,27 +154,47 @@ class BusinessSearched {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is BusinessSearched &&
-      o.categories == categories &&
-      o.coordinates == coordinates &&
-      o.displayPhone == displayPhone &&
-      o.distance == distance &&
-      o.id == id &&
-      o.alias == alias &&
-      o.imageUrl == imageUrl &&
-      o.location == location &&
-      o.name == name &&
-      o.phone == phone &&
-      o.price == price &&
-      o.rating == rating &&
-      o.reviewCount == reviewCount &&
-      o.url == url &&
-      listEquals(o.transactions, transactions);
+    return other is BusinessSearched &&
+      other.categories == categories &&
+      other.coordinates == coordinates &&
+      other.displayPhone == displayPhone &&
+      other.distance == distance &&
+      other.id == id &&
+      other.alias == alias &&
+      other.imageUrl == imageUrl &&
+      other.location == location &&
+      other.name == name &&
+      other.phone == phone &&
+      other.price == price &&
+      other.rating == rating &&
+      other.reviewCount == reviewCount &&
+      other.url == url &&
+      listEquals(other.transactions, transactions);
   }
+
+  @override
+  int get hashCode => Object.hash(
+    categories,
+    coordinates,
+    displayPhone,
+    distance,
+    id,
+    alias,
+    imageUrl,
+    location,
+    name,
+    phone,
+    price,
+    rating,
+    reviewCount,
+    url,
+    transactions,
+  );
+
 }
 
 /// List of business Yelp finds based on the search criteria.
@@ -196,13 +220,17 @@ class BusinessesSearched {
   String toString() => 'BusinessesSearched(businesses: $businesses)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is BusinessesSearched &&
-      listEquals(o.businesses, businesses);
+    return other is BusinessesSearched &&
+      listEquals(other.businesses, businesses);
   }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, businesses);
+
 }
 
 /// Suggested area in a map to display results in.
@@ -228,10 +256,14 @@ class Region {
   String toString() => 'Region(center: $center)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Region &&
-      o.center == center;
+    return other is Region &&
+      other.center == center;
   }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, center);
+
 }

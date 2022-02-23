@@ -67,19 +67,33 @@ class Location {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is Location &&
-      o.address1 == address1 &&
-      o.address2 == address2 &&
-      o.address3 == address3 &&
-      o.city == city &&
-      o.country == country &&
-      o.crossStreets == crossStreets &&
-      listEquals(o.displayAddress, displayAddress) &&
-      o.state == state &&
-      o.zipCode == zipCode;
+    return other is Location &&
+      other.address1 == address1 &&
+      other.address2 == address2 &&
+      other.address3 == address3 &&
+      other.city == city &&
+      other.country == country &&
+      other.crossStreets == crossStreets &&
+      listEquals(other.displayAddress, displayAddress) &&
+      other.state == state &&
+      other.zipCode == zipCode;
   }
+
+  @override
+  int get hashCode => Object.hash(
+    address1,
+    address2,
+    address3,
+    city,
+    country,
+    crossStreets,
+    displayAddress,
+    state,
+    zipCode,
+  );
+
 }

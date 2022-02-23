@@ -120,12 +120,12 @@ class BusinessDetails {
       messaging: Messaging.fromMap(map['messaging']),
       name: map['name'],
       phone: map['phone'],
-      photos: List<String>.from(map['photos']), // ?? [],
+      photos: List<String>.from(map['photos']),
       price: map['price'],
       rating: map['rating'],
       reviewCount: map['review_count'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']), // ?? [],
+      transactions: List<String>.from(map['transactions']),
       specialHours: SpecialHoursList.fromList(map['special_hours']),
       attributes: map['attributes'],
     );
@@ -139,31 +139,36 @@ class BusinessDetails {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final collectionEquals = const DeepCollectionEquality().equals;
   
-    return o is BusinessDetails &&
-      o.categories == categories &&
-      o.coordinates == coordinates &&
-      o.displayPhone == displayPhone &&
-      o.hours == hours &&
-      o.id == id &&
-      o.alias == alias &&
-      o.imageUrl == imageUrl &&
-      o.isClaimed == isClaimed &&
-      o.isClosed == isClosed &&
-      o.location == location &&
-      o.messaging == messaging &&
-      o.name == name &&
-      o.phone == phone &&
-      collectionEquals(o.photos, photos) &&
-      o.price == price &&
-      o.rating == rating &&
-      o.reviewCount == reviewCount &&
-      o.url == url &&
-      collectionEquals(o.transactions, transactions) &&
-      o.specialHours == specialHours &&
-      collectionEquals(o.attributes, attributes);
+    return other is BusinessDetails &&
+      other.categories == categories &&
+      other.coordinates == coordinates &&
+      other.displayPhone == displayPhone &&
+      other.hours == hours &&
+      other.id == id &&
+      other.alias == alias &&
+      other.imageUrl == imageUrl &&
+      other.isClaimed == isClaimed &&
+      other.isClosed == isClosed &&
+      other.location == location &&
+      other.messaging == messaging &&
+      other.name == name &&
+      other.phone == phone &&
+      collectionEquals(other.photos, photos) &&
+      other.price == price &&
+      other.rating == rating &&
+      other.reviewCount == reviewCount &&
+      other.url == url &&
+      collectionEquals(other.transactions, transactions) &&
+      other.specialHours == specialHours &&
+      collectionEquals(other.attributes, attributes);
   }
+
+  /// _Note:_ id is unique per business so id, alias, and name are sufficient for the hashCode
+  @override
+  int get hashCode => Object.hash(id, alias, name);
+
 }

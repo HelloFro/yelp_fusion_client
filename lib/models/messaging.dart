@@ -32,11 +32,15 @@ class Messaging {
   String toString() => 'Messaging(url: $url, useCaseText: $useCaseText)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Messaging &&
-      o.url == url &&
-      o.useCaseText == useCaseText;
+    return other is Messaging &&
+      other.url == url &&
+      other.useCaseText == useCaseText;
   }
+
+  @override
+  int get hashCode => Object.hash(url, useCaseText);
+
 }
