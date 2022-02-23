@@ -1,4 +1,4 @@
-## [0.2.0+1] - Null Safety + Passing Static Analysis (3 February 2022)
+# [0.2.0+1] - Null Safety + Passing Static Analysis (3 February 2022)
 
 * Override hashCode to every object
 * removed unused import
