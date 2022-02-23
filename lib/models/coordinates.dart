@@ -28,11 +28,15 @@ class Coordinates {
   String toString() => 'Coordinates(latitude: $latitude, longitude: $longitude)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Coordinates &&
-      o.latitude == latitude &&
-      o.longitude == longitude;
+    return other is Coordinates &&
+      other.latitude == latitude &&
+      other.longitude == longitude;
   }
+
+  @override
+  int get hashCode => Object.hash(latitude, longitude);
+
 }

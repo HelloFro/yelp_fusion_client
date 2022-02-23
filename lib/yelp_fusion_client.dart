@@ -55,10 +55,11 @@ class YelpFusion {
 
     Map<String, dynamic> jsonData = json.decode(response.body);
 
-    if(jsonData.containsKey('error'))
+    if(jsonData.containsKey('error')) {
       return jsonData['error'];
-    else
+    } else {
       return asObject ? Autocomplete.fromJson(response.body) : jsonData;
+    }
   }
 
   /// Get rich business data, such as name, address, phone number, photos, Yelp rating, price levels and hours of operation.
@@ -82,10 +83,11 @@ class YelpFusion {
 
     Map<String, dynamic> jsonData = json.decode(response.body);
 
-    if(jsonData.containsKey('error'))
+    if(jsonData.containsKey('error')) {
       return jsonData['error'];
-    else
+    } else {
       return asObject ? BusinessDetails.fromJson(response.body) : jsonData;
+    }
   }
 
   /// Get up to three review excerpts, the URL to the full review, the Yelp rating with each review excerpt as well as the name and profile photo of the reviewer.
@@ -109,10 +111,11 @@ class YelpFusion {
 
     Map<String, dynamic> jsonData = json.decode(response.body);
 
-    if(jsonData.containsKey('error'))
+    if(jsonData.containsKey('error')) {
       return jsonData['error'];
-    else
+    } else {
       return asObject ? BusinessReviews.fromJson(response.body) : jsonData;
+    }
   }
 
   /// Get up to 1000 businesses based on the provided search criteria.
@@ -198,9 +201,10 @@ class YelpFusion {
 
     Map<String, dynamic> jsonData = json.decode(response.body);
 
-    if(jsonData.containsKey('error'))
+    if(jsonData.containsKey('error')) {
       return jsonData['error'];
-    else
+    } else {
       return asObject ? BusinessSearch.fromJson(response.body) : jsonData;
+    }
   }
 }

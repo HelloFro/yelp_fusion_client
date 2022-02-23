@@ -48,15 +48,19 @@ class Open {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Open &&
-      o.day == day &&
-      o.start == start &&
-      o.end == end &&
-      o.isOvernight == isOvernight;
+    return other is Open &&
+      other.day == day &&
+      other.start == start &&
+      other.end == end &&
+      other.isOvernight == isOvernight;
   }
+
+  @override
+  int get hashCode => Object.hash(day, start, end, isOvernight);
+
 }
 
 /// Opening hours of the business.
@@ -94,15 +98,19 @@ class Hours {
   String toString() => 'Hours(isOpenNow: $isOpenNow, hoursType: $hoursType, open: $open)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is Hours &&
-      o.isOpenNow == isOpenNow &&
-      o.hoursType == hoursType &&
-      listEquals(o.open, open);
+    return other is Hours &&
+      other.isOpenNow == isOpenNow &&
+      other.hoursType == hoursType &&
+      listEquals(other.open, open);
   }
+
+  @override
+  int get hashCode => Object.hash(isOpenNow, hoursType, open);
+
 }
 
 class HoursList {
@@ -127,13 +135,17 @@ class HoursList {
   String toString() => 'HoursList(hours: $hours)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is HoursList &&
-      listEquals(o.hours, hours);
+    return other is HoursList &&
+      listEquals(other.hours, hours);
   }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, hours);
+
 }
 
 /// Out of the ordinary hours for a business that apply on certain dates.
@@ -181,16 +193,26 @@ class SpecialHours {
   }
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is SpecialHours &&
-      o.date == date &&
-      o.isClosed == isClosed &&
-      o.start == start &&
-      o.end == end &&
-      o.isOvernight == isOvernight;
+    return other is SpecialHours &&
+      other.date == date &&
+      other.isClosed == isClosed &&
+      other.start == start &&
+      other.end == end &&
+      other.isOvernight == isOvernight;
   }
+
+  @override
+  int get hashCode => Object.hash(
+    date,
+    isClosed,
+    start,
+    end,
+    isOvernight,
+  );
+
 }
 
 class SpecialHoursList {
@@ -215,11 +237,15 @@ class SpecialHoursList {
   String toString() => 'SpecialHoursList(hours: $specialHours)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is SpecialHoursList &&
-      listEquals(o.specialHours, specialHours);
+    return other is SpecialHoursList &&
+      listEquals(other.specialHours, specialHours);
   }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, specialHours);
+
 }

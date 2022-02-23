@@ -32,20 +32,23 @@ class Autocomplete {
   String toString() => 'Autocomplete(businesses: $businesses, categories: $categories, terms: $terms)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is Autocomplete &&
-      o.businesses == businesses &&
-      o.categories == categories &&
-      o.terms == terms;
+    return other is Autocomplete &&
+      other.businesses == businesses &&
+      other.categories == categories &&
+      other.terms == terms;
   }
+
+  @override
+  int get hashCode => Object.hash(businesses, categories, terms);
+
 }
 
 class BusinessAutocompleted {
 
   final String? name;
-
   final String? id;
 
   BusinessAutocompleted({
@@ -68,13 +71,17 @@ class BusinessAutocompleted {
   String toString() => 'Business(name: $name, id: $id)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
   
-    return o is BusinessAutocompleted &&
-      o.name == name &&
-      o.id == id;
+    return other is BusinessAutocompleted &&
+      other.name == name &&
+      other.id == id;
   }
+
+  @override
+  int get hashCode => Object.hash(name, id);
+
 }
 
 class BusinessesAutocompleted {
@@ -99,13 +106,17 @@ class BusinessesAutocompleted {
   String toString() => 'Businesses(businesses: $businesses)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is BusinessesAutocompleted &&
-      listEquals(o.businesses, businesses);
+    return other is BusinessesAutocompleted &&
+      listEquals(other.businesses, businesses);
   }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, businesses);
+
 }
 
 class Terms {
@@ -130,11 +141,15 @@ class Terms {
   String toString() => 'Terms(text: $text)';
 
   @override
-  bool operator ==(Object o) {
-    if (identical(this, o)) return true;
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
   
-    return o is Terms &&
-      listEquals(o.text, text);
+    return other is Terms &&
+      listEquals(other.text, text);
   }
+
+  @override
+  int get hashCode => Object.hash(super.hashCode, text);
+
 }
