@@ -1,10 +1,16 @@
-# [0.2.0+1] - Null Safety + Passing Static Analysis (3 February 2022)
+# [0.2.0+2] - Null Safety + Passing Static Analysis (23 February 2022)
+
+* Used pana v0.21.7 to reformat files and pass static analysis
+* Added example.md
+* Moved `# How to use the Yelp Fusion Client` from README.md `->` example.md
+
+## [0.2.0+1] - Null Safety + Passing Static Analysis (23 February 2022)
 
 * Override hashCode to every object
 * removed unused import
 * changed ```o -> other``` to match operator overrides
 
-## [0.2.0] - Null Safety (2 February 2022)
+## [0.2.0] - Null Safety (22 February 2022)
 
 * Fixed dartdoc comments
 
