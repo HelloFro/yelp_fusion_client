@@ -45,7 +45,7 @@ class Location {
 
   factory Location.fromMap(Map<String, dynamic>? map) {
     if (map == null) return Location();
-  
+
     return Location(
       address1: map['address1'],
       address2: map['address2'],
@@ -59,7 +59,8 @@ class Location {
     );
   }
 
-  factory Location.fromJson(String source) => Location.fromMap(json.decode(source));
+  factory Location.fromJson(String source) =>
+      Location.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -70,30 +71,29 @@ class Location {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
+
     return other is Location &&
-      other.address1 == address1 &&
-      other.address2 == address2 &&
-      other.address3 == address3 &&
-      other.city == city &&
-      other.country == country &&
-      other.crossStreets == crossStreets &&
-      listEquals(other.displayAddress, displayAddress) &&
-      other.state == state &&
-      other.zipCode == zipCode;
+        other.address1 == address1 &&
+        other.address2 == address2 &&
+        other.address3 == address3 &&
+        other.city == city &&
+        other.country == country &&
+        other.crossStreets == crossStreets &&
+        listEquals(other.displayAddress, displayAddress) &&
+        other.state == state &&
+        other.zipCode == zipCode;
   }
 
   @override
   int get hashCode => Object.hash(
-    address1,
-    address2,
-    address3,
-    city,
-    country,
-    crossStreets,
-    displayAddress,
-    state,
-    zipCode,
-  );
-
+        address1,
+        address2,
+        address3,
+        city,
+        country,
+        crossStreets,
+        displayAddress,
+        state,
+        zipCode,
+      );
 }

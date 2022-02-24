@@ -5,10 +5,10 @@ class Messaging {
   /// Action Link URL that drops user directly in to the messaging flow for a business.
   final String? url;
 
-  /// Indicates what kind of messaging can be done with a business, ie. 
-  ///   * "Request a Quote" for a home services business 
+  /// Indicates what kind of messaging can be done with a business, ie.
+  ///   * "Request a Quote" for a home services business
   ///   * "Request a Consultation" for a legal services business
-  ///  
+  ///
   ///   Note: Text will be localized based on the "locale" input parameter.
   final String? useCaseText;
 
@@ -19,14 +19,15 @@ class Messaging {
 
   factory Messaging.fromMap(Map<String, dynamic>? map) {
     if (map == null) return Messaging();
-  
+
     return Messaging(
       url: map['url'],
       useCaseText: map['use_case_text'],
     );
   }
 
-  factory Messaging.fromJson(String source) => Messaging.fromMap(json.decode(source));
+  factory Messaging.fromJson(String source) =>
+      Messaging.fromMap(json.decode(source));
 
   @override
   String toString() => 'Messaging(url: $url, useCaseText: $useCaseText)';
@@ -34,13 +35,12 @@ class Messaging {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Messaging &&
-      other.url == url &&
-      other.useCaseText == useCaseText;
+        other.url == url &&
+        other.useCaseText == useCaseText;
   }
 
   @override
   int get hashCode => Object.hash(url, useCaseText);
-
 }

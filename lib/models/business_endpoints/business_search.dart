@@ -25,7 +25,7 @@ class BusinessSearch {
 
   factory BusinessSearch.fromMap(Map<String, dynamic>? map) {
     if (map == null) return BusinessSearch();
-  
+
     return BusinessSearch(
       total: map['total'],
       businesses: BusinessesSearched.fromList(map['businesses']),
@@ -33,24 +33,25 @@ class BusinessSearch {
     );
   }
 
-  factory BusinessSearch.fromJson(String source) => BusinessSearch.fromMap(json.decode(source));
+  factory BusinessSearch.fromJson(String source) =>
+      BusinessSearch.fromMap(json.decode(source));
 
   @override
-  String toString() => 'BusinessSearch(total: $total, businesses: $businesses, region: $region)';
+  String toString() =>
+      'BusinessSearch(total: $total, businesses: $businesses, region: $region)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is BusinessSearch &&
-      other.total == total &&
-      other.businesses == businesses &&
-      other.region == region;
+        other.total == total &&
+        other.businesses == businesses &&
+        other.region == region;
   }
 
   @override
   int get hashCode => Object.hash(total, businesses, region);
-
 }
 
 /// Business Yelp found based on the search criteria.
@@ -64,18 +65,18 @@ class BusinessSearched {
   /// Phone number of the business formatted nicely to be displayed to users.
   final String? displayPhone;
 
-  /// Distance in meters from the search location. 
-  /// 
+  /// Distance in meters from the search location.
+  ///
   /// Note: meters regardless of the locale.
   final double? distance;
 
   /// Unique Yelp ID of this business.
-  /// 
+  ///
   /// ie. '4kMBvIEWPxWkWKFN__8SxQ'
   final String? id;
 
   /// Unique Yelp alias of this business. Can contain unicode characters.
-  /// 
+  ///
   /// ie. 'yelp-san-francisco'
   final String? alias;
 
@@ -126,7 +127,7 @@ class BusinessSearched {
 
   factory BusinessSearched.fromMap(Map<String, dynamic>? map) {
     if (map == null) return BusinessSearched();
-  
+
     return BusinessSearched(
       categories: Categories.fromList(map['categories']),
       coordinates: Coordinates.fromMap(map['coordinates']),
@@ -146,7 +147,8 @@ class BusinessSearched {
     );
   }
 
-  factory BusinessSearched.fromJson(String source) => BusinessSearched.fromMap(json.decode(source));
+  factory BusinessSearched.fromJson(String source) =>
+      BusinessSearched.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -157,49 +159,47 @@ class BusinessSearched {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
+
     return other is BusinessSearched &&
-      other.categories == categories &&
-      other.coordinates == coordinates &&
-      other.displayPhone == displayPhone &&
-      other.distance == distance &&
-      other.id == id &&
-      other.alias == alias &&
-      other.imageUrl == imageUrl &&
-      other.location == location &&
-      other.name == name &&
-      other.phone == phone &&
-      other.price == price &&
-      other.rating == rating &&
-      other.reviewCount == reviewCount &&
-      other.url == url &&
-      listEquals(other.transactions, transactions);
+        other.categories == categories &&
+        other.coordinates == coordinates &&
+        other.displayPhone == displayPhone &&
+        other.distance == distance &&
+        other.id == id &&
+        other.alias == alias &&
+        other.imageUrl == imageUrl &&
+        other.location == location &&
+        other.name == name &&
+        other.phone == phone &&
+        other.price == price &&
+        other.rating == rating &&
+        other.reviewCount == reviewCount &&
+        other.url == url &&
+        listEquals(other.transactions, transactions);
   }
 
   @override
   int get hashCode => Object.hash(
-    categories,
-    coordinates,
-    displayPhone,
-    distance,
-    id,
-    alias,
-    imageUrl,
-    location,
-    name,
-    phone,
-    price,
-    rating,
-    reviewCount,
-    url,
-    transactions,
-  );
-
+        categories,
+        coordinates,
+        displayPhone,
+        distance,
+        id,
+        alias,
+        imageUrl,
+        location,
+        name,
+        phone,
+        price,
+        rating,
+        reviewCount,
+        url,
+        transactions,
+      );
 }
 
 /// List of business Yelp finds based on the search criteria.
 class BusinessesSearched {
-
   final List<BusinessSearched>? businesses;
 
   BusinessesSearched({
@@ -208,13 +208,14 @@ class BusinessesSearched {
 
   factory BusinessesSearched.fromList(List<dynamic>? list) {
     if (list == null) return BusinessesSearched();
-  
+
     return BusinessesSearched(
       businesses: list.map((x) => BusinessSearched.fromMap(x)).toList(),
     );
   }
 
-  factory BusinessesSearched.fromJson(String source) => BusinessesSearched.fromList(json.decode(source));
+  factory BusinessesSearched.fromJson(String source) =>
+      BusinessesSearched.fromList(json.decode(source));
 
   @override
   String toString() => 'BusinessesSearched(businesses: $businesses)';
@@ -223,14 +224,13 @@ class BusinessesSearched {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
+
     return other is BusinessesSearched &&
-      listEquals(other.businesses, businesses);
+        listEquals(other.businesses, businesses);
   }
 
   @override
   int get hashCode => Object.hash(super.hashCode, businesses);
-
 }
 
 /// Suggested area in a map to display results in.
@@ -244,7 +244,7 @@ class Region {
 
   factory Region.fromMap(Map<String, dynamic>? map) {
     if (map == null) return Region();
-  
+
     return Region(
       center: Coordinates.fromMap(map['center']),
     );
@@ -258,12 +258,10 @@ class Region {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
-    return other is Region &&
-      other.center == center;
+
+    return other is Region && other.center == center;
   }
 
   @override
   int get hashCode => Object.hash(super.hashCode, center);
-
 }

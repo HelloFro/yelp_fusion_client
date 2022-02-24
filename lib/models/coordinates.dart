@@ -15,28 +15,29 @@ class Coordinates {
 
   factory Coordinates.fromMap(Map<String, dynamic>? map) {
     if (map == null) return Coordinates();
-  
+
     return Coordinates(
       latitude: map['latitude'],
       longitude: map['longitude'],
     );
   }
 
-  factory Coordinates.fromJson(String source) => Coordinates.fromMap(json.decode(source));
+  factory Coordinates.fromJson(String source) =>
+      Coordinates.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Coordinates(latitude: $latitude, longitude: $longitude)';
+  String toString() =>
+      'Coordinates(latitude: $latitude, longitude: $longitude)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Coordinates &&
-      other.latitude == latitude &&
-      other.longitude == longitude;
+        other.latitude == latitude &&
+        other.longitude == longitude;
   }
 
   @override
   int get hashCode => Object.hash(latitude, longitude);
-
 }

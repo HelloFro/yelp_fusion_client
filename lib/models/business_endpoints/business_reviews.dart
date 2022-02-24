@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 
 /// This endpoint returns up to three review excerpts for a given business ordered by Yelp's default sort order.
-/// 
-/// Note: at this time, the API does not return businesses without any reviews. 
+///
+/// Note: at this time, the API does not return businesses without any reviews.
 class BusinessReviews {
   /// The total number of reviews that the business has.
   final int? total;
@@ -23,7 +23,7 @@ class BusinessReviews {
 
   factory BusinessReviews.fromMap(Map<String, dynamic>? map) {
     if (map == null) return BusinessReviews();
-  
+
     return BusinessReviews(
       total: map['total'],
       possibleLanguages: List<String>.from(map['possible_languages']),
@@ -31,25 +31,26 @@ class BusinessReviews {
     );
   }
 
-  factory BusinessReviews.fromJson(String source) => BusinessReviews.fromMap(json.decode(source));
+  factory BusinessReviews.fromJson(String source) =>
+      BusinessReviews.fromMap(json.decode(source));
 
   @override
-  String toString() => 'BusinessReviews(total: $total, possibleLanguages: $possibleLanguages, reviews: $reviews)';
+  String toString() =>
+      'BusinessReviews(total: $total, possibleLanguages: $possibleLanguages, reviews: $reviews)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
+
     return other is BusinessReviews &&
-      other.total == total &&
-      listEquals(other.possibleLanguages, possibleLanguages) &&
-      listEquals(other.reviews, reviews);
+        other.total == total &&
+        listEquals(other.possibleLanguages, possibleLanguages) &&
+        listEquals(other.reviews, reviews);
   }
 
   @override
   int get hashCode => Object.hash(total, possibleLanguages, reviews);
-
 }
 
 /// A reviews of a business.
@@ -83,7 +84,7 @@ class Review {
 
   factory Review.fromMap(Map<String, dynamic>? map) {
     if (map == null) return Review();
-  
+
     return Review(
       id: map['id'],
       text: map['text'],
@@ -104,19 +105,18 @@ class Review {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Review &&
-      other.id == id &&
-      other.text == text &&
-      other.url == url &&
-      other.rating == rating &&
-      other.timeCreated == timeCreated &&
-      other.user == user;
+        other.id == id &&
+        other.text == text &&
+        other.url == url &&
+        other.rating == rating &&
+        other.timeCreated == timeCreated &&
+        other.user == user;
   }
 
   @override
   int get hashCode => Object.hash(id, text, url, rating, timeCreated, user);
-
 }
 
 /// The User Who created a review
@@ -142,7 +142,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic>? map) {
     if (map == null) return User();
-  
+
     return User(
       id: map['id'],
       profileUrl: map['profile_url'],
@@ -161,15 +161,14 @@ class User {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is User &&
-      other.id == id &&
-      other.profileUrl == profileUrl &&
-      other.name == name &&
-      other.imageUrl == imageUrl;
+        other.id == id &&
+        other.profileUrl == profileUrl &&
+        other.name == name &&
+        other.imageUrl == imageUrl;
   }
 
   @override
   int get hashCode => Object.hash(id, profileUrl, name, imageUrl);
-
 }

@@ -7,18 +7,18 @@ class Open {
   /// From 0 to 6, representing day of the week from Monday to Sunday.
   final int? day;
 
-  /// Start of the opening hours in a day, in 24-hour clock notation 
-  /// 
+  /// Start of the opening hours in a day, in 24-hour clock notation
+  ///
   /// ie. 1000 == 10:00 AM.
   final String? start;
 
-  /// End of the opening hours in a day, in 24-hour clock notation 
-  /// 
+  /// End of the opening hours in a day, in 24-hour clock notation
+  ///
   /// ie. 2130 == 9:30 PM.
   final String? end;
 
-  /// Whether the business opens overnight or not. 
-  /// 
+  /// Whether the business opens overnight or not.
+  ///
   /// Note: When this is true, the end time will be lower than the start time.
   final bool? isOvernight;
 
@@ -31,7 +31,7 @@ class Open {
 
   factory Open.fromMap(Map<String, dynamic>? map) {
     if (map == null) return Open();
-  
+
     return Open(
       day: map['day'],
       start: map['start'],
@@ -50,17 +50,16 @@ class Open {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Open &&
-      other.day == day &&
-      other.start == start &&
-      other.end == end &&
-      other.isOvernight == isOvernight;
+        other.day == day &&
+        other.start == start &&
+        other.end == end &&
+        other.isOvernight == isOvernight;
   }
 
   @override
   int get hashCode => Object.hash(day, start, end, isOvernight);
-
 }
 
 /// Opening hours of the business.
@@ -68,8 +67,8 @@ class Hours {
   /// Whether the business is currently open or not.
   final bool? isOpenNow;
 
-  /// The type of the opening hours information. 
-  /// 
+  /// The type of the opening hours information.
+  ///
   /// Note: Currently, this is always REGULAR.
   final String? hoursType;
 
@@ -84,7 +83,7 @@ class Hours {
 
   factory Hours.fromMap(Map<String, dynamic>? map) {
     if (map == null) return Hours();
-  
+
     return Hours(
       isOpenNow: map['is_open_now'],
       hoursType: map['hours_type'],
@@ -95,26 +94,25 @@ class Hours {
   factory Hours.fromJson(String source) => Hours.fromMap(json.decode(source));
 
   @override
-  String toString() => 'Hours(isOpenNow: $isOpenNow, hoursType: $hoursType, open: $open)';
+  String toString() =>
+      'Hours(isOpenNow: $isOpenNow, hoursType: $hoursType, open: $open)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
+
     return other is Hours &&
-      other.isOpenNow == isOpenNow &&
-      other.hoursType == hoursType &&
-      listEquals(other.open, open);
+        other.isOpenNow == isOpenNow &&
+        other.hoursType == hoursType &&
+        listEquals(other.open, open);
   }
 
   @override
   int get hashCode => Object.hash(isOpenNow, hoursType, open);
-
 }
 
 class HoursList {
-
   final List<Hours>? hours;
 
   HoursList({
@@ -123,13 +121,14 @@ class HoursList {
 
   factory HoursList.fromList(List<dynamic>? list) {
     if (list == null) return HoursList();
-  
+
     return HoursList(
       hours: list.map((x) => Hours.fromMap(x)).toList(),
     );
   }
 
-  factory HoursList.fromJson(String source) => HoursList.fromList(json.decode(source));
+  factory HoursList.fromJson(String source) =>
+      HoursList.fromList(json.decode(source));
 
   @override
   String toString() => 'HoursList(hours: $hours)';
@@ -138,14 +137,12 @@ class HoursList {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
-    return other is HoursList &&
-      listEquals(other.hours, hours);
+
+    return other is HoursList && listEquals(other.hours, hours);
   }
 
   @override
   int get hashCode => Object.hash(super.hashCode, hours);
-
 }
 
 /// Out of the ordinary hours for a business that apply on certain dates.
@@ -175,7 +172,7 @@ class SpecialHours {
 
   factory SpecialHours.fromMap(Map<String, dynamic>? map) {
     if (map == null) return SpecialHours();
-  
+
     return SpecialHours(
       date: map['date'],
       isClosed: map['is_closed'],
@@ -185,7 +182,8 @@ class SpecialHours {
     );
   }
 
-  factory SpecialHours.fromJson(String source) => SpecialHours.fromMap(json.decode(source));
+  factory SpecialHours.fromJson(String source) =>
+      SpecialHours.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -195,28 +193,26 @@ class SpecialHours {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is SpecialHours &&
-      other.date == date &&
-      other.isClosed == isClosed &&
-      other.start == start &&
-      other.end == end &&
-      other.isOvernight == isOvernight;
+        other.date == date &&
+        other.isClosed == isClosed &&
+        other.start == start &&
+        other.end == end &&
+        other.isOvernight == isOvernight;
   }
 
   @override
   int get hashCode => Object.hash(
-    date,
-    isClosed,
-    start,
-    end,
-    isOvernight,
-  );
-
+        date,
+        isClosed,
+        start,
+        end,
+        isOvernight,
+      );
 }
 
 class SpecialHoursList {
-
   final List<SpecialHours>? specialHours;
 
   SpecialHoursList({
@@ -225,13 +221,14 @@ class SpecialHoursList {
 
   factory SpecialHoursList.fromList(List<dynamic>? list) {
     if (list == null) return SpecialHoursList();
-  
+
     return SpecialHoursList(
       specialHours: list.map((x) => SpecialHours.fromMap(x)).toList(),
     );
   }
 
-  factory SpecialHoursList.fromJson(String source) => SpecialHoursList.fromList(json.decode(source));
+  factory SpecialHoursList.fromJson(String source) =>
+      SpecialHoursList.fromList(json.decode(source));
 
   @override
   String toString() => 'SpecialHoursList(hours: $specialHours)';
@@ -240,12 +237,11 @@ class SpecialHoursList {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final listEquals = const DeepCollectionEquality().equals;
-  
+
     return other is SpecialHoursList &&
-      listEquals(other.specialHours, specialHours);
+        listEquals(other.specialHours, specialHours);
   }
 
   @override
   int get hashCode => Object.hash(super.hashCode, specialHours);
-
 }

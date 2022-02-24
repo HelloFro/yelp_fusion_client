@@ -9,7 +9,7 @@ import 'package:yelp_fusion_client/models/location.dart';
 import 'package:yelp_fusion_client/models/messaging.dart';
 
 /// This endpoint returns detailed business content.
-/// 
+///
 /// Note: at this time, the API does not return businesses without any reviews.
 class BusinessDetails {
   /// A list of category title and alias pairs associated with this business.
@@ -25,13 +25,13 @@ class BusinessDetails {
   final HoursList? hours;
 
   /// Unique Yelp ID of this business.
-  /// 
+  ///
   /// ie. '4kMBvIEWPxWkWKFN__8SxQ'
   final String? id;
 
   /// Unique Yelp alias of this business. Can contain unicode characters.
-  /// 
-  /// ie. 'yelp-san-francisco'. 
+  ///
+  /// ie. 'yelp-san-francisco'.
   final String? alias;
 
   /// URL of photo for this business.
@@ -105,7 +105,7 @@ class BusinessDetails {
 
   factory BusinessDetails.fromMap(Map<String, dynamic>? map) {
     if (map == null) return BusinessDetails();
-  
+
     return BusinessDetails(
       categories: Categories.fromList(map['categories']),
       coordinates: Coordinates.fromMap(map['coordinates']),
@@ -131,7 +131,8 @@ class BusinessDetails {
     );
   }
 
-  factory BusinessDetails.fromJson(String source) => BusinessDetails.fromMap(json.decode(source));
+  factory BusinessDetails.fromJson(String source) =>
+      BusinessDetails.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -142,33 +143,32 @@ class BusinessDetails {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     final collectionEquals = const DeepCollectionEquality().equals;
-  
+
     return other is BusinessDetails &&
-      other.categories == categories &&
-      other.coordinates == coordinates &&
-      other.displayPhone == displayPhone &&
-      other.hours == hours &&
-      other.id == id &&
-      other.alias == alias &&
-      other.imageUrl == imageUrl &&
-      other.isClaimed == isClaimed &&
-      other.isClosed == isClosed &&
-      other.location == location &&
-      other.messaging == messaging &&
-      other.name == name &&
-      other.phone == phone &&
-      collectionEquals(other.photos, photos) &&
-      other.price == price &&
-      other.rating == rating &&
-      other.reviewCount == reviewCount &&
-      other.url == url &&
-      collectionEquals(other.transactions, transactions) &&
-      other.specialHours == specialHours &&
-      collectionEquals(other.attributes, attributes);
+        other.categories == categories &&
+        other.coordinates == coordinates &&
+        other.displayPhone == displayPhone &&
+        other.hours == hours &&
+        other.id == id &&
+        other.alias == alias &&
+        other.imageUrl == imageUrl &&
+        other.isClaimed == isClaimed &&
+        other.isClosed == isClosed &&
+        other.location == location &&
+        other.messaging == messaging &&
+        other.name == name &&
+        other.phone == phone &&
+        collectionEquals(other.photos, photos) &&
+        other.price == price &&
+        other.rating == rating &&
+        other.reviewCount == reviewCount &&
+        other.url == url &&
+        collectionEquals(other.transactions, transactions) &&
+        other.specialHours == specialHours &&
+        collectionEquals(other.attributes, attributes);
   }
 
   /// _Note:_ id is unique per business so id, alias, and name are sufficient for the hashCode
   @override
   int get hashCode => Object.hash(id, alias, name);
-
 }
