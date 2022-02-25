@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0+3
+
+* Bug Fixes
+* `fetchBusinessSearch()` should no longer throw
+  * `Location.fromMap()`: removed `?? []` that conditionally returned an empty `List<dynamic>` if the `String? crossStreets` was `null`.
+* Updated example.md
+
 ## 0.2.0+2
 
 * Null Safety + Passing Static Analysis Fixes
@@ -11,8 +18,8 @@
 
 * Null Safety + Passing Static Analysis
 * Override hashCode to every object
-* removed unused import
-* changed `o -> other` to match operator overrides
+* Removed unused import
+* Changed `o -> other` to match operator overrides
 
 ## 0.2.0-nullsafety
 
