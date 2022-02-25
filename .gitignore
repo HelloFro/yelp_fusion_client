@@ -8,6 +8,9 @@
 .buildlog/
 .history
 .svn/
+.env
+env.g.dart
+pana.bat
 
 # IntelliJ related
 *.iml
