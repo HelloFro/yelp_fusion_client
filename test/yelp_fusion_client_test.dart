@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:yelp_fusion_client/models/business_endpoints/business_search.dart';
 import 'package:yelp_fusion_client/yelp_fusion_client.dart';
 
 import 'env/env.dart';
@@ -8,9 +9,9 @@ void main() {
 
   group('fetchBusinessDetails', () {
     test('Business Details ARE Fetched by Business alias/id', () async {
-      var details = await api.fetchBusinessDetails(id: 'north-india-restaurant-san-francisco');
+      var details = await api.fetchBusinessDetails(id: 'north-india-restaurant-san-francisco-7');
 
-      expect(details.alias, 'north-india-restaurant-san-francisco');
+      expect(details.alias, 'north-india-restaurant-san-francisco-7');
     });
 
     test('Business Details ARE NOT Fetched by Business alias/id and error code is returned', () async {
@@ -30,15 +31,21 @@ void main() {
 
   group('fetchBusinessSearch', () {
     test('BusinessSearch IS Fetched by term based on lat & long AND first business MATCHES expected alias', () async {
-      var search = await api.fetchBusinessSearch(term: 'delis', latitude: 37.786882, longitude: -122.399972);
+      var search = await api.fetchBusinessSearch(term: 'delis', latitude: 37.786882, longitude: -122.399972, limit: 1);
 
       expect(search.businesses.businesses.first.alias, "molinari-delicatessen-san-francisco");
     });
 
     test('BusinessSearch IS Fetched by term based on lat & long AND returns at least one business', () async {
-      var search = await api.fetchBusinessSearch(term: 'delis', latitude: 37.786882, longitude: -122.399972);
+      var search = await api.fetchBusinessSearch(term: 'delis', latitude: 37.786882, longitude: -122.399972, limit: 2);
 
       expect(search.total, greaterThan(0));
+    });
+
+    test('BusinessSearch IS Fetched by term based on lat+long AND returns at least one business AS a BusinessSearch Object AND imageUrl isNotNull', () async {
+      BusinessSearch search = await api.fetchBusinessSearch(term: 'delis', latitude: 37.786882, longitude: -122.399972, limit: 1);
+
+      expect(search.businesses?.businesses?.first.url, isNotNull);
     });
   });
 
