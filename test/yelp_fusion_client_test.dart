@@ -45,7 +45,14 @@ void main() {
     test('BusinessSearch IS Fetched by term based on lat+long AND returns at least one business AS a BusinessSearch Object AND imageUrl isNotNull', () async {
       BusinessSearch search = await api.fetchBusinessSearch(term: 'delis', latitude: 37.786882, longitude: -122.399972, limit: 1);
 
-      expect(search.businesses?.businesses?.first.url, isNotNull);
+      expect(search.businesses?.businesses?.first.imageUrl, isNotNull);
+    });
+
+    test('BusinessSearch IS consistent between Object/JSON return types', () async {
+      BusinessSearch search = await api.fetchBusinessSearch(location: 'Austin, TX', asObject: true, categories: 'restaurants, All', limit: 1);
+      dynamic searchAsJSON = await api.fetchBusinessSearch(location: 'Austin, TX', asObject: false, categories: 'restaurants, All', limit: 1);
+
+      expect(search.businesses?.businesses?.first.imageUrl, equals(searchAsJSON['businesses']?.first['image_url']));
     });
   });
 
