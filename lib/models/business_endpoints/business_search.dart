@@ -135,7 +135,7 @@ class BusinessSearched {
       distance: map['distance'],
       id: map['id'],
       alias: map['alias'],
-      imageUrl: map['imageUrl'],
+      imageUrl: map['image_url'],
       location: Location.fromMap(map['location']),
       name: map['name'],
       phone: map['phone'],
