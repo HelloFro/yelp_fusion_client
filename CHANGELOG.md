@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0+3-hotfix
+
+* Bug Fix
+* `fetchBusinessSearch()` should no longer always return a `null` for `imageUrl` when `asObject` is set to `true`.
+
 ## 0.2.0+3
 
 * Bug Fixes
