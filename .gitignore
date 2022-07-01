@@ -8,9 +8,11 @@
 .buildlog/
 .history
 .svn/
+.github
+
+# Local Dev Env
 .env
 env.g.dart
-pana.bat
 
 # IntelliJ related
 *.iml
@@ -32,6 +34,7 @@ pana.bat
 .pub-cache/
 .pub/
 build/
+pana.bat
 
 # Android related
 **/android/**/gradle-wrapper.jar
