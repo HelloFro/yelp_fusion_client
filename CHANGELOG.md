@@ -2,12 +2,14 @@
 
 ## 0.2.0+3-hotfix
 
-* Bug Fix
+Bug Fix
+
 * `fetchBusinessSearch()` should no longer always return a `null` for `imageUrl` when `asObject` is set to `true`.
 
 ## 0.2.0+3
 
-* Bug Fixes
+Bug Fixes
+
 * `fetchBusinessSearch()` should no longer throw
   * `Location.fromMap()`: removed `?? []` that conditionally returned an empty `List<dynamic>` if the `String? crossStreets` was `null`.
 * Updated example.md
