@@ -87,7 +87,9 @@ class Hours {
     return Hours(
       isOpenNow: map['is_open_now'],
       hoursType: map['hours_type'],
-      open: List<Open>.from(map['open']?.map((x) => Open.fromMap(x))),
+      open: map['open'] == null
+          ? null
+          : List<Open>.from(map['open'].map((x) => Open.fromMap(x))),
     );
   }
 

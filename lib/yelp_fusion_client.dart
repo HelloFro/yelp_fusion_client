@@ -14,11 +14,18 @@ class YelpFusion {
   /// Yelp Fusion API Key
   String apiKey;
 
+  /// Host authority the requests are sent to. `Default=api.yelp.com.`
+  ///
+  /// The Yelp Fusion API does not send CORS headers, so browsers block
+  /// direct requests from web apps (e.g. Flutter Web). Set this to your
+  /// own CORS proxy that forwards requests to `api.yelp.com`.
+  String baseUrl;
+
   /// Headers for Authorization and Content Request Type
   Map<String, String>? _headers;
 
   /// **Requires** API Key. Sets GET request headers.
-  YelpFusion({required this.apiKey}) {
+  YelpFusion({required this.apiKey, this.baseUrl = 'api.yelp.com'}) {
     _headers = {
       'Authorization': 'Bearer $apiKey',
       "Content-type": "application/json",
@@ -47,7 +54,7 @@ class YelpFusion {
       'locale': locale,
     };
 
-    var url = Uri.https('api.yelp.com', 'v3/autocomplete', params);
+    var url = Uri.https(baseUrl, 'v3/autocomplete', params);
 
     final response = await http.get(url, headers: _headers);
 
@@ -73,7 +80,7 @@ class YelpFusion {
       'locale': locale,
     };
 
-    var url = Uri.https('api.yelp.com', 'v3/businesses/$id', params);
+    var url = Uri.https(baseUrl, 'v3/businesses/$id', params);
 
     final response = await http.get(url, headers: _headers);
 
@@ -91,15 +98,27 @@ class YelpFusion {
   /// id: **Required.** Business id or alias.
   ///
   /// locale: Optional. `Default=en_US.`
+  ///
+  /// limit: Optional. Number of reviews to get.
+  ///
+  /// offset: Optional. Offset the list of returned reviews by this amount.
+  ///
+  /// sortBy: Optional. Sorting algorithm, ie. yelp_sort or newest.
   Future fetchBusinessReviews(
       {required String id,
       String locale = "en_US",
+      int? limit,
+      int? offset,
+      String? sortBy,
       bool asObject = true}) async {
     var params = {
       'locale': locale,
+      if (limit != null) 'limit': limit.toString(),
+      if (offset != null) 'offset': offset.toString(),
+      if (sortBy != null) 'sort_by': sortBy,
     };
 
-    var url = Uri.https('api.yelp.com', 'v3/businesses/$id/reviews', params);
+    var url = Uri.https(baseUrl, 'v3/businesses/$id/reviews', params);
 
     final response = await http.get(url, headers: _headers);
 
@@ -153,6 +172,21 @@ class YelpFusion {
   ///
   /// attributes: Optional.
   /// Additional filters to get specific search results.
+  ///
+  /// devicePlatform: Optional.
+  /// Platform to use for the mobile_link property, ie. android, ios or mobile-generic.
+  ///
+  /// reservationDate: Optional.
+  /// Date to find businesses with reservation openings for, in YYYY-mm-dd format.
+  ///
+  /// reservationTime: Optional.
+  /// Time to find businesses with reservation openings for, in HH:MM format.
+  ///
+  /// reservationCovers: Optional.
+  /// Number of people the reservation is for, ie. 1 to 10.
+  ///
+  /// matchesPartySizeParam: Optional.
+  /// Whether to filter out results that don't have openings matching the reservation params.
   Future fetchBusinessSearch(
       {String? term,
       String? location,
@@ -168,6 +202,11 @@ class YelpFusion {
       bool? openNow,
       int? openAt,
       String? attributes,
+      String? devicePlatform,
+      String? reservationDate,
+      String? reservationTime,
+      int? reservationCovers,
+      bool? matchesPartySizeParam,
       bool asObject = true}) async {
     assert(latitude != null && longitude != null && location == null ||
         location != null && latitude == null && longitude == null);
@@ -187,9 +226,16 @@ class YelpFusion {
       if (openNow != null) 'open_now': openNow.toString(),
       if (openAt != null) 'open_at': openAt.toString(),
       if (attributes != null) 'attributes': attributes,
+      if (devicePlatform != null) 'device_platform': devicePlatform,
+      if (reservationDate != null) 'reservation_date': reservationDate,
+      if (reservationTime != null) 'reservation_time': reservationTime,
+      if (reservationCovers != null)
+        'reservation_covers': reservationCovers.toString(),
+      if (matchesPartySizeParam != null)
+        'matches_party_size_param': matchesPartySizeParam.toString(),
     };
 
-    var url = Uri.https('api.yelp.com', 'v3/businesses/search', params);
+    var url = Uri.https(baseUrl, 'v3/businesses/search', params);
 
     final response = await http.get(url, headers: _headers);
 

@@ -120,12 +120,14 @@ class BusinessDetails {
       messaging: Messaging.fromMap(map['messaging']),
       name: map['name'],
       phone: map['phone'],
-      photos: List<String>.from(map['photos']),
+      photos: map['photos'] == null ? null : List<String>.from(map['photos']),
       price: map['price'],
-      rating: map['rating'],
+      rating: (map['rating'] as num?)?.toDouble(),
       reviewCount: map['review_count'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']),
+      transactions: map['transactions'] == null
+          ? null
+          : List<String>.from(map['transactions']),
       specialHours: SpecialHoursList.fromList(map['special_hours']),
       attributes: map['attributes'],
     );

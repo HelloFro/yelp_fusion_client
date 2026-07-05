@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 
 import 'package:yelp_fusion_client/models/category.dart';
 import 'package:yelp_fusion_client/models/coordinates.dart';
+import 'package:yelp_fusion_client/models/hours.dart';
 import 'package:yelp_fusion_client/models/location.dart';
 
 /// Use Business Search endpoint when you have general info on the biz like name & location but don't know the address.
@@ -107,6 +108,12 @@ class BusinessSearched {
   /// List of Yelp transactions that the business is registered for. ie. pickup, delivery, or restaurant_reservation.
   final List<String>? transactions;
 
+  /// Regular opening hours of this business.
+  final HoursList? businessHours;
+
+  /// Various features or facilities provided by this business.
+  final Map<String, dynamic>? attributes;
+
   BusinessSearched({
     this.categories,
     this.coordinates,
@@ -123,6 +130,8 @@ class BusinessSearched {
     this.reviewCount,
     this.url,
     this.transactions,
+    this.businessHours,
+    this.attributes,
   });
 
   factory BusinessSearched.fromMap(Map<String, dynamic>? map) {
@@ -131,8 +140,8 @@ class BusinessSearched {
     return BusinessSearched(
       categories: Categories.fromList(map['categories']),
       coordinates: Coordinates.fromMap(map['coordinates']),
-      displayPhone: map['displayPhone'],
-      distance: map['distance'],
+      displayPhone: map['display_phone'],
+      distance: (map['distance'] as num?)?.toDouble(),
       id: map['id'],
       alias: map['alias'],
       imageUrl: map['image_url'],
@@ -140,10 +149,14 @@ class BusinessSearched {
       name: map['name'],
       phone: map['phone'],
       price: map['price'],
-      rating: map['rating'],
-      reviewCount: map['reviewCount'],
+      rating: (map['rating'] as num?)?.toDouble(),
+      reviewCount: map['review_count'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']),
+      transactions: map['transactions'] == null
+          ? null
+          : List<String>.from(map['transactions']),
+      businessHours: HoursList.fromList(map['business_hours']),
+      attributes: map['attributes'],
     );
   }
 
@@ -152,7 +165,7 @@ class BusinessSearched {
 
   @override
   String toString() {
-    return 'BusinessSearched(categories: $categories, coordinates: $coordinates, displayPhone: $displayPhone, distance: $distance, id: $id, alias: $alias, imageUrl: $imageUrl, location: $location, name: $name, phone: $phone, price: $price, rating: $rating, reviewCount: $reviewCount, url: $url, transactions: $transactions)';
+    return 'BusinessSearched(categories: $categories, coordinates: $coordinates, displayPhone: $displayPhone, distance: $distance, id: $id, alias: $alias, imageUrl: $imageUrl, location: $location, name: $name, phone: $phone, price: $price, rating: $rating, reviewCount: $reviewCount, url: $url, transactions: $transactions, businessHours: $businessHours, attributes: $attributes)';
   }
 
   @override
@@ -175,7 +188,9 @@ class BusinessSearched {
         other.rating == rating &&
         other.reviewCount == reviewCount &&
         other.url == url &&
-        listEquals(other.transactions, transactions);
+        listEquals(other.transactions, transactions) &&
+        other.businessHours == businessHours &&
+        listEquals(other.attributes, attributes);
   }
 
   @override
@@ -195,6 +210,8 @@ class BusinessSearched {
         reviewCount,
         url,
         transactions,
+        businessHours,
+        attributes,
       );
 }
 
