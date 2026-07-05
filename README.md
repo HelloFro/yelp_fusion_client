@@ -1,10 +1,10 @@
 # yelp_fusion_client
 
-A Dart Client for Yelp Fusion API.
+A Dart Client for the Yelp Places API (formerly Yelp Fusion API).
 
 ![](https://github.com/HelloFro/yelp_fusion_client/blob/main/Yelp-Fusion-Dart-Banner.png)
 
-This Dart package reduces the work to write Future methods and https requests to fetch the API and parse the json data for developers looking to use the Yelp Fusion API in an app. Developers can retrieve API data formatted as json or package defined Dart Objects.
+This Dart package reduces the work to write Future methods and https requests to fetch the API and parse the json data for developers looking to use the Yelp Places API in an app. Developers can retrieve API data formatted as json or package defined Dart Objects.
 
 ## Getting Started
 
@@ -12,7 +12,9 @@ This Dart package reduces the work to write Future methods and https requests to
 
 1. Once you have a Yelp user account and have signed in, you can go to the Manage App page to create an app with Yelp. Then, you'll get your API Key, which you can use for calls in the Yelp Fusion Client.
 
-See: [Developer Documentation](https://www.yelp.com/developers/documentation/v3)
+*Note : Yelp now offers API access through paid plans. New keys start with a 30-day trial that includes 5,000 free API calls; after that a paid plan is required. Some data, such as the Reviews endpoint, is only available on higher-tier plans. See [Yelp API plans](https://docs.developer.yelp.com/docs/plans) for details.*
+
+See: [Developer Documentation](https://docs.developer.yelp.com/)
 
 ## How to use the Yelp Fusion Client
 

@@ -1,5 +1,9 @@
 import 'package:test/test.dart';
+import 'package:yelp_fusion_client/models/business_endpoints/business_details.dart';
+import 'package:yelp_fusion_client/models/business_endpoints/business_reviews.dart';
 import 'package:yelp_fusion_client/models/business_endpoints/business_search.dart';
+import 'package:yelp_fusion_client/models/hours.dart';
+import 'package:yelp_fusion_client/models/location.dart';
 
 void main() {
   group('BusinessSearched.fromMap', () {
@@ -28,6 +32,20 @@ void main() {
         'display_address': ['375 Valencia St', 'San Francisco, CA 94103']
       },
       'transactions': ['pickup', 'delivery'],
+      'business_hours': [
+        {
+          'hours_type': 'REGULAR',
+          'is_open_now': true,
+          'open': [
+            {'day': 0, 'start': '0700', 'end': '2000', 'is_overnight': false}
+          ]
+        }
+      ],
+      'attributes': {
+        'business_temp_closed': null,
+        'menu_url': 'https://fourbarrelcoffee.com/menu',
+        'open24_hours': false,
+      },
     };
 
     test('parses display_phone and review_count (issue #13)', () {
@@ -63,6 +81,64 @@ void main() {
       expect(business.id, isNull);
       expect(business.displayPhone, isNull);
       expect(business.reviewCount, isNull);
+    });
+
+    test('parses business_hours and attributes', () {
+      final business = BusinessSearched.fromMap(sampleMap);
+
+      expect(business.businessHours?.hours, hasLength(1));
+      expect(business.businessHours?.hours?.first.hoursType, 'REGULAR');
+      expect(business.businessHours?.hours?.first.isOpenNow, isTrue);
+      expect(business.businessHours?.hours?.first.open?.first.day, 0);
+      expect(business.attributes?['menu_url'],
+          'https://fourbarrelcoffee.com/menu');
+    });
+
+    test('coerces integer rating and distance to double', () {
+      final map = Map<String, dynamic>.from(sampleMap)
+        ..['rating'] = 4
+        ..['distance'] = 1604;
+
+      final business = BusinessSearched.fromMap(map);
+
+      expect(business.rating, 4.0);
+      expect(business.distance, 1604.0);
+    });
+  });
+
+  group('parsing tolerates absent list keys', () {
+    test('BusinessDetails.fromMap without photos/transactions', () {
+      final details = BusinessDetails.fromMap({
+        'id': 'abc',
+        'name': 'Some Business',
+        'rating': 4,
+      });
+
+      expect(details.photos, isNull);
+      expect(details.transactions, isNull);
+      expect(details.rating, 4.0);
+    });
+
+    test('BusinessReviews.fromMap without reviews/possible_languages', () {
+      final reviews = BusinessReviews.fromMap({'total': 0});
+
+      expect(reviews.total, 0);
+      expect(reviews.reviews, isNull);
+      expect(reviews.possibleLanguages, isNull);
+    });
+
+    test('Location.fromMap without display_address', () {
+      final location = Location.fromMap({'city': 'San Francisco'});
+
+      expect(location.city, 'San Francisco');
+      expect(location.displayAddress, isNull);
+    });
+
+    test('Hours.fromMap without open', () {
+      final hours = Hours.fromMap({'hours_type': 'REGULAR'});
+
+      expect(hours.hoursType, 'REGULAR');
+      expect(hours.open, isNull);
     });
   });
 }

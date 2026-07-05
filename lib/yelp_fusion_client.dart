@@ -98,12 +98,24 @@ class YelpFusion {
   /// id: **Required.** Business id or alias.
   ///
   /// locale: Optional. `Default=en_US.`
+  ///
+  /// limit: Optional. Number of reviews to get.
+  ///
+  /// offset: Optional. Offset the list of returned reviews by this amount.
+  ///
+  /// sortBy: Optional. Sorting algorithm, ie. yelp_sort or newest.
   Future fetchBusinessReviews(
       {required String id,
       String locale = "en_US",
+      int? limit,
+      int? offset,
+      String? sortBy,
       bool asObject = true}) async {
     var params = {
       'locale': locale,
+      if (limit != null) 'limit': limit.toString(),
+      if (offset != null) 'offset': offset.toString(),
+      if (sortBy != null) 'sort_by': sortBy,
     };
 
     var url = Uri.https(baseUrl, 'v3/businesses/$id/reviews', params);
@@ -160,6 +172,21 @@ class YelpFusion {
   ///
   /// attributes: Optional.
   /// Additional filters to get specific search results.
+  ///
+  /// devicePlatform: Optional.
+  /// Platform to use for the mobile_link property, ie. android, ios or mobile-generic.
+  ///
+  /// reservationDate: Optional.
+  /// Date to find businesses with reservation openings for, in YYYY-mm-dd format.
+  ///
+  /// reservationTime: Optional.
+  /// Time to find businesses with reservation openings for, in HH:MM format.
+  ///
+  /// reservationCovers: Optional.
+  /// Number of people the reservation is for, ie. 1 to 10.
+  ///
+  /// matchesPartySizeParam: Optional.
+  /// Whether to filter out results that don't have openings matching the reservation params.
   Future fetchBusinessSearch(
       {String? term,
       String? location,
@@ -175,6 +202,11 @@ class YelpFusion {
       bool? openNow,
       int? openAt,
       String? attributes,
+      String? devicePlatform,
+      String? reservationDate,
+      String? reservationTime,
+      int? reservationCovers,
+      bool? matchesPartySizeParam,
       bool asObject = true}) async {
     assert(latitude != null && longitude != null && location == null ||
         location != null && latitude == null && longitude == null);
@@ -194,6 +226,13 @@ class YelpFusion {
       if (openNow != null) 'open_now': openNow.toString(),
       if (openAt != null) 'open_at': openAt.toString(),
       if (attributes != null) 'attributes': attributes,
+      if (devicePlatform != null) 'device_platform': devicePlatform,
+      if (reservationDate != null) 'reservation_date': reservationDate,
+      if (reservationTime != null) 'reservation_time': reservationTime,
+      if (reservationCovers != null)
+        'reservation_covers': reservationCovers.toString(),
+      if (matchesPartySizeParam != null)
+        'matches_party_size_param': matchesPartySizeParam.toString(),
     };
 
     var url = Uri.https(baseUrl, 'v3/businesses/search', params);

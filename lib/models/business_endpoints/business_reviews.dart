@@ -26,8 +26,12 @@ class BusinessReviews {
 
     return BusinessReviews(
       total: map['total'],
-      possibleLanguages: List<String>.from(map['possible_languages']),
-      reviews: (map['reviews'] as List).map((x) => Review.fromMap(x)).toList(),
+      possibleLanguages: map['possible_languages'] == null
+          ? null
+          : List<String>.from(map['possible_languages']),
+      reviews: map['reviews'] == null
+          ? null
+          : (map['reviews'] as List).map((x) => Review.fromMap(x)).toList(),
     );
   }
 

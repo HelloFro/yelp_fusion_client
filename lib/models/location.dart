@@ -53,7 +53,9 @@ class Location {
       city: map['city'],
       country: map['country'],
       crossStreets: map['cross_streets'],
-      displayAddress: List<String>.from(map['display_address']),
+      displayAddress: map['display_address'] == null
+          ? null
+          : List<String>.from(map['display_address']),
       state: map['state'],
       zipCode: map['zip_code'],
     );
