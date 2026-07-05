@@ -131,7 +131,7 @@ class BusinessSearched {
     return BusinessSearched(
       categories: Categories.fromList(map['categories']),
       coordinates: Coordinates.fromMap(map['coordinates']),
-      displayPhone: map['displayPhone'],
+      displayPhone: map['display_phone'],
       distance: map['distance'],
       id: map['id'],
       alias: map['alias'],
@@ -141,9 +141,11 @@ class BusinessSearched {
       phone: map['phone'],
       price: map['price'],
       rating: map['rating'],
-      reviewCount: map['reviewCount'],
+      reviewCount: map['review_count'],
       url: map['url'],
-      transactions: List<String>.from(map['transactions']),
+      transactions: map['transactions'] == null
+          ? null
+          : List<String>.from(map['transactions']),
     );
   }
 

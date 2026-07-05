@@ -49,6 +49,25 @@ fetchBusinessSearch() | BusinessSearch | Map<String, dynamic>
 
 *Note : You can use the `.` operator to know which members are available for each returned object when `asObject=true`.*
 
+## Flutter Web / CORS
+
+The Yelp Fusion API does not send CORS headers, so browsers block requests made directly from web apps. On Flutter Web this surfaces as:
+
+```
+Error: XMLHttpRequest error.
+```
+
+This is a restriction of the Yelp API itself and cannot be fixed from Dart code. To use this package on the web, route requests through your own CORS proxy (e.g. a small Cloud Function or server that forwards requests to `api.yelp.com` and adds the `Access-Control-Allow-Origin` header), then point the client at it:
+
+```dart
+final YelpFusion api = YelpFusion(
+  apiKey: '<Your Yelp Fusion API Key>',
+  baseUrl: 'your-proxy.example.com', // defaults to api.yelp.com
+);
+```
+
+On mobile and desktop no proxy is needed — the default `baseUrl` works as-is.
+
 ## Notes/Issues
 
 If you like this package, please leave a :+1:.

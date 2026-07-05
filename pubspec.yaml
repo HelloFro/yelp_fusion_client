@@ -10,3 +10,6 @@ environment:
 dependencies:
   collection: ^1.15.0
   http: ^0.13.4
+
+dev_dependencies:
+  test: ^1.17.0
